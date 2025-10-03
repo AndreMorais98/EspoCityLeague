@@ -3,12 +3,12 @@ __pycache__/
 *$py.class
 
 # Virtual environments
-*.venv/
-*venv/
+.venv/
+venv/
 
 # Environment files
-*.env
-*.env.*
+.env
+.env.*
 
 # Packaging
 .Python

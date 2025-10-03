@@ -1,0 +1,41 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+*.venv/
+*venv/
+
+# Environment files
+*.env
+*.env.*
+
+# Packaging
+.Python
+build/
+dist/
+.eggs/
+*.egg-info/
+
+# Caches
+.mypy_cache/
+.pytest_cache/
+coverage.xml
+.coverage*
+
+# Editors/OS
+.DS_Store
+.idea/
+.vscode/
+
+# VCS
+.git/
+.gitignore
+
+# Node (if present)
+node_modules/
+
+# Keep these
+!Dockerfile
+!pyproject.toml
+!poetry.lock

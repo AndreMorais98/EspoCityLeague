@@ -20,6 +20,11 @@ def create_bet(bet: Bet, session: Session = Depends(get_session)) -> Bet:
     return bet
 
 
+@router.get("/", response_model=list[Bet])
+def list_bets(session: Session = Depends(get_session)) -> list[Bet]:
+    return session.exec(select(Bet)).all()
+
+
 @router.get("/{bet_id}", response_model=Bet)
 def get_bet(bet_id: int, session: Session = Depends(get_session)) -> Bet:
     bet = session.get(Bet, bet_id)

@@ -25,9 +25,9 @@ def upgrade() -> None:
         sa.Column("updated_at", sa.DateTime, nullable=False, server_default=sa.func.now()),
     )
 
-    admin_username = os.getenv("ADMIN_USERNAME", "admin")
-    admin_phone = os.getenv("ADMIN_PHONE", "0000000000")
-    admin_password = os.getenv("ADMIN_PASSWORD", "admin")
+    admin_username = os.getenv("ADMIN_USERNAME")
+    admin_phone = os.getenv("ADMIN_PHONE")
+    admin_password = os.getenv("ADMIN_PASSWORD")
     hashed = bcrypt.hashpw(admin_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
     users = table(
@@ -54,7 +54,47 @@ def upgrade() -> None:
                 "score": 0,
                 "created_at": datetime.now(),
                 "updated_at": datetime.now(),
-            }
+            },
+            {
+                "username": "celo",
+                "phone": "910000001",
+                "hashed_password": bcrypt.hashpw("password".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
+                "is_active": True,
+                "is_superuser": False,
+                "score": 0,
+                "created_at": datetime.now(),
+                "updated_at": datetime.now(),
+            },
+            {
+                "username": "nuno",
+                "phone": "910000002",
+                "hashed_password": bcrypt.hashpw("password".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
+                "is_active": True,
+                "is_superuser": False,
+                "score": 0,
+                "created_at": datetime.now(),
+                "updated_at": datetime.now(),
+            },
+            {
+                "username": "barbosa",
+                "phone": "910000003",
+                "hashed_password": bcrypt.hashpw("password".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
+                "is_active": True,
+                "is_superuser": False,
+                "score": 0,
+                "created_at": datetime.now(),
+                "updated_at": datetime.now(),
+            },
+            {
+                "username": "tiagao",
+                "phone": "910000004",
+                "hashed_password": bcrypt.hashpw("password".encode("utf-8"), bcrypt.gensalt()).decode("utf-8"),
+                "is_active": True,
+                "is_superuser": False,
+                "score": 0,
+                "created_at": datetime.now(),
+                "updated_at": datetime.now(),
+            },
         ],
     )
 

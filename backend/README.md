@@ -22,16 +22,16 @@ docker compose up --build
 ## Environment
 Create `.env` in `backend/`:
 ```
-DB_HOST=db
-DB_PORT=5432
-DB_NAME=espocity
-DB_USER=postgres
-DB_PASSWORD=postgres
+DB_HOST=DB_HOST
+DB_PORT=DB_PORT
+DB_NAME=DB_NAME=espocity
+DB_USER=DB_USER
+DB_PASSWORD=DB_PASSWORD
 
 # Admin seed for initial migration
-ADMIN_USERNAME=admin
-ADMIN_PHONE=0000000000
-ADMIN_PASSWORD=admin
+ADMIN_USERNAME=ADMIN_USERNAME
+ADMIN_PHONE=ADMIN_PHONE
+ADMIN_PASSWORD=ADMIN_PASSWORD
 ```
 If the Postgres volume already exists and `DB_NAME` is missing, create it:
 ```bash

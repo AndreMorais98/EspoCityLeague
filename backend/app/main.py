@@ -7,6 +7,13 @@ from .routers.matches import router as matches_router
 from .routers.bets import router as bets_router
 from .routers.auth import router as auth_router
 from .routers.leaderboard import router as leaderboard_router
+from .routers.stages import router as stages_router
+# Import models to ensure they're registered with SQLModel
+from .models.user import User
+from .models.team import Team
+from .models.match import Match
+from .models.bet import Bet
+from .models.stage import Stage
 
 
 @asynccontextmanager
@@ -33,6 +40,7 @@ app.include_router(teams_router)
 app.include_router(matches_router)
 app.include_router(bets_router)
 app.include_router(leaderboard_router)
+app.include_router(stages_router)
 
 
 @app.get("/health")

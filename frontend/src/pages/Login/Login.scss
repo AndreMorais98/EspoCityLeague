@@ -142,7 +142,7 @@
   
   .title-line {
     display: block;
-    background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #0099ff 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #1e3a8a 50%, #3730a3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -201,9 +201,9 @@
   right: -2px;
   bottom: -2px;
   background: linear-gradient(135deg, 
-    #00d4ff 0%, 
-    #0099ff 50%, 
-    #00d4ff 100%
+    #1e3a8a 0%, 
+    #3730a3 50%, 
+    #1e3a8a 100%
   );
   border-radius: 24px;
   opacity: 0.5;
@@ -294,11 +294,11 @@
   }
 
   &:focus {
-    border-color: #00d4ff;
+    border-color: #1e3a8a;
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 
-      0 0 0 3px rgba(0, 212, 255, 0.15),
-      0 4px 12px rgba(0, 212, 255, 0.2);
+      0 0 0 3px rgba(30, 58, 138, 0.15),
+      0 4px 12px rgba(30, 58, 138, 0.2);
     transform: translateY(-1px);
   }
 
@@ -309,7 +309,7 @@
 }
 
 .login-button {
-  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
   border: none;
   border-radius: 12px;
   padding: 14px 24px;
@@ -335,11 +335,11 @@
   }
 
   &:hover {
-    background: linear-gradient(135deg, #00bfff 0%, #0088ee 100%);
+    background: linear-gradient(135deg, #1e40af 0%, #4338ca 100%);
     transform: translateY(-2px);
     box-shadow: 
-      0 8px 25px rgba(0, 212, 255, 0.4),
-      0 0 40px rgba(0, 212, 255, 0.2);
+      0 8px 25px rgba(30, 58, 138, 0.4),
+      0 0 40px rgba(30, 58, 138, 0.2);
     
     &::before {
       left: 100%;
@@ -384,14 +384,14 @@
   text-align: center;
   
   a {
-    color: #00d4ff;
+    color: #1e3a8a;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s ease;
     
     &:hover {
-      color: #00bfff;
+      color: #3730a3;
       text-decoration: underline;
     }
   }

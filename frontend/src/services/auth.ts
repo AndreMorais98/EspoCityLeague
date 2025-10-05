@@ -1,43 +1,70 @@
 interface LoginCredentials {
-  email: string;
+  username: string;
   password: string;
 }
 
-interface AuthResponse {
-  token: string;
-  user: {
-    email: string;
-  };
+export interface User {
+  id: number;
+  username: string;
+  phone: string;
+  score: number;
+  is_active: boolean;
+  is_superuser: boolean;
 }
 
-export async function login({ email, password }: LoginCredentials): Promise<AuthResponse> {
-  await new Promise(resolve => setTimeout(resolve, 500));
+interface AuthResponse {
+  access_token: string;
+  token_type: string;
+  user: User;
+}
+
+export async function login({ username, password }: LoginCredentials): Promise<AuthResponse> {
+  const response = await fetch('http://localhost:8000/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password }),
+  });
   
-  if (!email || !password) {
-    throw new Error('Email and password are required');
+  if (!response.ok) {
+    throw new Error('Invalid credentials');
   }
   
-  if (email === 'admin@example.com' && password === 'password') {
-    return { 
-      token: 'fake-jwt-token', 
-      user: { email } 
-    };
-  }
-  
-  throw new Error('Invalid credentials');
+  return response.json();
 }
 
 export async function logout(): Promise<void> {
-  // TODO: Implement logout functionality
-  await new Promise(resolve => setTimeout(resolve, 100));
+  localStorage.removeItem('authToken');
 }
 
 export function getAuthToken(): string | null {
-  // TODO: Get token from localStorage or secure storage
   return localStorage.getItem('authToken');
 }
 
 export function setAuthToken(token: string): void {
-  // TODO: Store token securely
   localStorage.setItem('authToken', token);
+}
+
+export function isAuthenticated(): boolean {
+  return getAuthToken() !== null;
+}
+
+export async function getCurrentUser(): Promise<User> {
+  const token = getAuthToken();
+  if (!token) {
+    throw new Error('No authentication token found');
+  }
+
+  const response = await fetch('http://localhost:8000/auth/me', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user info');
+  }
+
+  return response.json();
 }

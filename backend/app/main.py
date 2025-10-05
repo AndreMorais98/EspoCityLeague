@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .db import engine
 from .routers.teams import router as teams_router
 from .routers.matches import router as matches_router
 from .routers.bets import router as bets_router
 from .routers.auth import router as auth_router
+from .routers.leaderboard import router as leaderboard_router
 
 
 @asynccontextmanager
@@ -18,10 +20,19 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="EspoCityLeague API", lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(auth_router)
 app.include_router(teams_router)
 app.include_router(matches_router)
 app.include_router(bets_router)
+app.include_router(leaderboard_router)
 
 
 @app.get("/health")

@@ -3,9 +3,9 @@ import time
 import bcrypt
 import jwt
 
-JWT_SECRET = os.getenv("JWT_SECRET", "devsecret")
+JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALG = "HS256"
-JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", "3600"))
+JWT_EXPIRE_SECONDS = 3600
 
 
 def hash_password(plain: str) -> str:
@@ -14,8 +14,15 @@ def hash_password(plain: str) -> str:
 
 def verify_password(plain: str, hashed: str) -> bool:
     try:
-        return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
-    except Exception:
+        # Ensure both are bytes for bcrypt.checkpw
+        plain_bytes = plain.encode("utf-8")
+        if isinstance(hashed, str):
+            hashed_bytes = hashed.encode("utf-8")
+        else:
+            hashed_bytes = hashed
+        return bcrypt.checkpw(plain_bytes, hashed_bytes)
+    except Exception as e:
+        print(f"Password verification error: {e}")
         return False
 
 

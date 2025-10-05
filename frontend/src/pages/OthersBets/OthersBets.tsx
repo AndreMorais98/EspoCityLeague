@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiService } from '../../services/api';
 
 interface Bet {
   id: number;
@@ -17,10 +18,7 @@ export default function OthersBets() {
   useEffect(() => {
     const load = async () => {
       try {
-        const base = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8000';
-        const res = await fetch(`${base}/bets`);
-        if (!res.ok) throw new Error(`Failed: ${res.status}`);
-        const data = await res.json();
+        const data = await apiService.getBets();
         setBets(data);
       } catch (e: any) {
         setError(e.message);

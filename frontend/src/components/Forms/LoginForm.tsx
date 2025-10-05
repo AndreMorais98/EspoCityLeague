@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
-import { login } from '../../services/auth';
-
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
+import { useNavigate } from 'react-router'; 
+import { login, setAuthToken } from '../../services/auth';
+import { useUser } from '../../contexts/UserContext';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const navigate = useNavigate();
+  const { setUser } = useUser();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
     
     try {
-      await login({ email, password });
-      // TODO: redirect to dashboard when implemented
+      const response = await login({ username, password });
+      console.log(response);
+      setAuthToken(response.access_token);
+      // Set user in context from API response
+      setUser(response.user);
+      navigate('/leaderboard');
     } catch (err: any) {
       setError(err?.message || 'Failed to sign in');
     } finally {
@@ -32,16 +35,16 @@ export default function LoginForm() {
       {error && <div className="login-error">{error}</div>}
       
       <div className="login-form-group">
-        <label className="login-label" htmlFor="email">
-          Email Address
+        <label className="login-label" htmlFor="username">
+          Username
         </label>
         <input
-          id="email"
-          type="email"
+          id="username"
+          type="text"
           className="login-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter your username"
           required
         />
       </div>

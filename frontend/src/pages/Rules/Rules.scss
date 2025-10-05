@@ -1,0 +1,310 @@
+.rules {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 32px;
+    background: linear-gradient(135deg, #1e3a8a, #3730a3);
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, #ffffff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .rules__subtitle {
+      font-size: 20px;
+      margin: 0;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  &__section {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+  }
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f1f5f9;
+
+  .section__icon {
+    font-size: 32px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #1e3a8a, #3730a3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+  }
+}
+
+// Scoring Cards
+.scoring-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.scoring-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  &.perfect {
+    border-color: #10b981;
+    color: #065f46;
+
+    &::before {
+      background: linear-gradient(90deg, transparent, #10b981, transparent);
+    }
+
+    .card__points {
+      color: #10b981;
+    }
+  }
+
+  &.good {
+    border-color: #eab308;
+    color: #a16207;
+
+    &::before {
+      background: linear-gradient(90deg, transparent, #eab308, transparent);
+    }
+
+    .card__points {
+      color: #eab308;
+    }
+  }
+
+  &.wrong {
+    border-color: #ef4444;
+    color: #991b1b;
+
+    &::before {
+      background: linear-gradient(90deg, transparent, #ef4444, transparent);
+    }
+
+    .card__points {
+      color: #ef4444;
+    }
+  }
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .card__icon {
+    font-size: 24px;
+  }
+
+  .card__points {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: white;
+  }
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card__description {
+  font-size: 16px;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.card__example {
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid currentColor;
+}
+
+// Tiebreaker System
+.tiebreaker-info {
+  .tiebreaker__intro {
+    font-size: 18px;
+    color: #64748b;
+    margin-bottom: 32px;
+    text-align: center;
+    font-style: italic;
+  }
+}
+
+.tiebreaker-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tiebreaker-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #1e3a8a;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f1f5f9;
+    transform: translateX(4px);
+  }
+
+  .step__number {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e3a8a;
+    background: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.2);
+  }
+
+  .step__content {
+    flex: 1;
+
+    .step__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .step__description {
+      font-size: 16px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+  }
+}
+
+
+// Responsive Design
+@media (max-width: 768px) {
+  .rules {
+    padding: 16px;
+
+    &__header {
+      padding: 24px;
+      margin-bottom: 32px;
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .rules__subtitle {
+        font-size: 16px;
+      }
+    }
+
+    &__section {
+      padding: 24px;
+    }
+  }
+
+  .section__header {
+    .section__icon {
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+
+  .scoring-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tiebreaker-step {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+
+    .step__number {
+      align-self: center;
+    }
+  }
+
+
+  .card__header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

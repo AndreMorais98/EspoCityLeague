@@ -1,7 +1,7 @@
 "use client"
 
 import "./Login.scss"
-import LoginForm from "../../components/Auth/LoginForm"
+import LoginForm from "../../components/Forms/LoginForm"
 import { useEffect, useRef } from "react"
 
 function FloatingStars() {

@@ -20,14 +20,15 @@ def upgrade() -> None:
         sa.Column("hashed_password", sa.String, nullable=False),
         sa.Column("is_active", sa.Boolean, nullable=False, server_default=sa.text("true")),
         sa.Column("is_superuser", sa.Boolean, nullable=False, server_default=sa.text("false")),
+        sa.Column("score", sa.Integer, nullable=False, server_default="0"),
         sa.Column("created_at", sa.DateTime, nullable=False, server_default=sa.func.now()),
         sa.Column("updated_at", sa.DateTime, nullable=False, server_default=sa.func.now()),
     )
 
     admin_username = os.getenv("ADMIN_USERNAME", "admin")
     admin_phone = os.getenv("ADMIN_PHONE", "0000000000")
-    admin_password = os.getenv("ADMIN_PASSWORD", "admin").encode("utf-8")
-    hashed = bcrypt.hashpw(admin_password, bcrypt.gensalt()).decode("utf-8")
+    admin_password = os.getenv("ADMIN_PASSWORD", "admin")
+    hashed = bcrypt.hashpw(admin_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
     users = table(
         "users",
@@ -36,6 +37,7 @@ def upgrade() -> None:
         column("hashed_password", sa.String),
         column("is_active", sa.Boolean),
         column("is_superuser", sa.Boolean),
+        column("score", sa.Integer),
         column("created_at", sa.DateTime),
         column("updated_at", sa.DateTime),
     )
@@ -49,6 +51,7 @@ def upgrade() -> None:
                 "hashed_password": hashed,
                 "is_active": True,
                 "is_superuser": True,
+                "score": 0,
                 "created_at": datetime.now(),
                 "updated_at": datetime.now(),
             }

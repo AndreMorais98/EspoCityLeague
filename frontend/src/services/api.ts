@@ -1,0 +1,94 @@
+import { getAuthToken, User } from './auth';
+
+const API_BASE_URL = 'http://localhost:8000';
+
+interface ApiResponse<T> {
+  data: T;
+  error?: string;
+}
+
+class ApiService {
+  private async makeRequest<T>(
+    endpoint: string,
+    options: RequestInit = {}
+  ): Promise<T> {
+    const token = getAuthToken();
+    const url = `${API_BASE_URL}${endpoint}`;
+
+    const defaultHeaders: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+
+    if (token) {
+      defaultHeaders['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        ...defaultHeaders,
+        ...options.headers,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  // Auth endpoints
+  async getCurrentUser(): Promise<User> {
+    return this.makeRequest<User>('/auth/me/');
+  }
+
+  async updateCurrentUser(updateData: { username?: string; phone?: string; password?: string }): Promise<User> {
+    return this.makeRequest<User>('/auth/me/', {
+      method: 'PUT',
+      body: JSON.stringify(updateData),
+    });
+  }
+
+  // Leaderboard endpoints
+  async getLeaderboard(): Promise<User[]> {
+    return this.makeRequest<User[]>('/leaderboard/');
+  }
+
+  // Bets endpoints
+  async getBets(): Promise<any[]> {
+    return this.makeRequest<any[]>('/bets/');
+  }
+
+  async getBetById(id: number): Promise<any> {
+    return this.makeRequest<any>(`/bets/${id}/`);
+  }
+
+  async getUserBets(userId: number): Promise<any[]> {
+    return this.makeRequest<any[]>(`/bets/user/${userId}/`);
+  }
+
+  // Teams endpoints
+  async getTeams(): Promise<any[]> {
+    return this.makeRequest<any[]>('/teams/');
+  }
+
+  async getTeamById(id: number): Promise<any> {
+    return this.makeRequest<any>(`/teams/${id}/`);
+  }
+
+  // Matches endpoints
+  async getMatches(): Promise<any[]> {
+    return this.makeRequest<any[]>('/matches/');
+  }
+
+  async getMatchesByDate(date: string): Promise<any[]> {
+    return this.makeRequest<any[]>(`/matches/?date=${date}`);
+  }
+
+  async getMatchById(id: number): Promise<any> {
+    return this.makeRequest<any>(`/matches/${id}/`);
+  }
+}
+
+export const apiService = new ApiService();

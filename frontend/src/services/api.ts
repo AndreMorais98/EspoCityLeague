@@ -68,6 +68,20 @@ class ApiService {
     return this.makeRequest<any[]>(`/bets/user/${userId}/`);
   }
 
+  async createBet(betData: { user_id: number; match_id: number; home_score_prediction: number; away_score_prediction: number }): Promise<any> {
+    return this.makeRequest<any>('/bets/', {
+      method: 'POST',
+      body: JSON.stringify(betData),
+    });
+  }
+
+  async updateBet(betId: number, betData: { home_score_prediction: number; away_score_prediction: number }): Promise<any> {
+    return this.makeRequest<any>(`/bets/${betId}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(betData),
+    });
+  }
+
   // Teams endpoints
   async getTeams(): Promise<any[]> {
     return this.makeRequest<any[]>('/teams/');

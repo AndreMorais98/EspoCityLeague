@@ -8,6 +8,18 @@
   margin-bottom: 32px;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .games-title {
   font-size: 32px;
   font-weight: 700;
@@ -19,6 +31,32 @@
   font-size: 16px;
   color: #666;
   margin: 0;
+}
+
+.total-points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+
+  .points-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .points-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
 }
 
 .stage-tabs {
@@ -60,18 +98,18 @@
   white-space: nowrap;
 
   &:hover {
-    border-color: #4CAF50;
-    color: #4CAF50;
+    border-color: #2196F3;
+    color: #2196F3;
   }
 
   &.active {
-    background: #4CAF50;
-    border-color: #4CAF50;
+    background: #2196F3;
+    border-color: #2196F3;
     color: white;
 
     &:hover {
-      background: #45a049;
-      border-color: #45a049;
+      background: #1976D2;
+      border-color: #1976D2;
     }
   }
 }

@@ -4,10 +4,38 @@
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  border: 3px solid transparent;
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &.border-green {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    
+    &:hover {
+      box-shadow: 0 4px 16px rgba(76, 175, 80, 0.4);
+    }
+  }
+
+  &.border-yellow {
+    border-color: #ff9800;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+    
+    &:hover {
+      box-shadow: 0 4px 16px rgba(255, 152, 0, 0.4);
+    }
+  }
+
+  &.border-red {
+    border-color: #f44336;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+    
+    &:hover {
+      box-shadow: 0 4px 16px rgba(244, 67, 54, 0.4);
+    }
   }
 }
 
@@ -165,7 +193,7 @@
 
   &:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #2196F3;
   }
 
   &::placeholder {
@@ -191,7 +219,7 @@
 }
 
 .predict-button {
-  background: #4CAF50;
+  background: #2196F3;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -201,11 +229,71 @@
   cursor: pointer;
   transition: background 0.2s;
 
-  &:hover {
-    background: #45a049;
+  &:hover:not(:disabled) {
+    background: #1976D2;
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: scale(0.98);
   }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.bet-info-section {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bet-prediction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.bet-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+}
+
+.bet-score {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.points-text {
+  font-size: 18px;
+  font-weight: 800;
+  margin-left: 8px;
+  
+  &.green {
+    color: #4CAF50;
+  }
+
+  &.yellow {
+    color: #ff9800;
+  }
+
+  &.red {
+    color: #f44336;
+  }
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  text-align: center;
+  padding: 4px 0;
 }

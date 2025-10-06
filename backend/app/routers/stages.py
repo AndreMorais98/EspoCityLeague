@@ -4,6 +4,7 @@ from sqlmodel import Session, select
 from ..db import get_session
 from ..models.stage import Stage, StageCreate, StageUpdate, StageResponse
 from ..models.match import Match
+from ..models.bet import Bet
 from ..dependencies import get_current_user
 from ..models.user import User
 
@@ -111,7 +112,7 @@ def get_stage_matches(
     session: Session = Depends(get_session),
     current_user: User = Depends(get_current_user)
 ):
-    """Get all matches for a specific stage"""
+    """Get all matches for a specific stage with user's bets"""
     stage = session.get(Stage, stage_id)
     if not stage:
         raise HTTPException(
@@ -122,9 +123,17 @@ def get_stage_matches(
     statement = select(Match).where(Match.stage_id == stage_id).order_by(Match.kickoff_at)
     matches = session.exec(statement).all()
     
-    # Return matches with their related data
-    return [
-        {
+    # Return matches with their related data and user's bet if exists
+    result = []
+    for match in matches:
+        # Get user's bet for this match
+        bet_statement = select(Bet).where(
+            Bet.match_id == match.id,
+            Bet.user_id == current_user.id
+        )
+        user_bet = session.exec(bet_statement).first()
+        
+        match_data = {
             "id": match.id,
             "home_team_id": match.home_team_id,
             "away_team_id": match.away_team_id,
@@ -148,7 +157,14 @@ def get_stage_matches(
             "stage": {
                 "id": match.stage.id,
                 "name": match.stage.name,
-            }
+            },
+            "user_bet": {
+                "id": user_bet.id,
+                "home_score_prediction": user_bet.home_score_prediction,
+                "away_score_prediction": user_bet.away_score_prediction,
+                "points_awarded": user_bet.points_awarded,
+            } if user_bet else None
         }
-        for match in matches
-    ]
+        result.append(match_data)
+    
+    return result

@@ -24,7 +24,7 @@
   &__title {
     font-size: 32px;
     font-weight: 700;
-    background: linear-gradient(135deg, #1e3a8a, #3730a3);
+    background: linear-gradient(135deg, #2196F3, #1976D2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -37,7 +37,7 @@
     border-radius: 12px;
     padding: 12px 16px;
     font-size: 14px;
-    color: #1e3a8a;
+    color: #2196F3;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
@@ -87,9 +87,9 @@
   transition: all 0.2s ease;
 
   &.active {
-    background: #1e3a8a;
+    background: #2196F3;
     color: #ffffff;
-    box-shadow: 0 2px 4px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
   }
 
   &:hover:not(.active) {
@@ -160,7 +160,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1e3a8a, #3730a3);
+  background: linear-gradient(135deg, #2196F3, #1976D2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,7 +311,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1e3a8a, #3730a3);
+  background: linear-gradient(135deg, #2196F3, #1976D2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,7 +353,7 @@
   justify-content: flex-end;
   gap: 6px;
   font-weight: 600;
-  color: #1e3a8a;
+  color: #2196F3;
   font-size: 16px;
 
   .reward__diamond {

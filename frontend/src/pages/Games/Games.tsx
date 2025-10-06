@@ -26,6 +26,12 @@ interface Match {
     id: number;
     name: string;
   };
+  user_bet?: {
+    id: number;
+    home_score_prediction: number;
+    away_score_prediction: number;
+    points_awarded: number;
+  } | null;
 }
 
 export default function Games() {
@@ -111,6 +117,15 @@ export default function Games() {
     return date.toLocaleDateString('en-US', options);
   };
 
+  const calculateTotalPoints = (): number => {
+    return matches.reduce((total, match) => {
+      if (match.user_bet && match.home_score !== null && match.away_score !== null) {
+        return total + match.user_bet.points_awarded;
+      }
+      return total;
+    }, 0);
+  };
+
   if (loading && stages.length === 0) {
     return (
       <div className="games-container">
@@ -130,8 +145,18 @@ export default function Games() {
   return (
     <div className="games-container">
       <div className="games-header">
-        <h1 className="games-title">Matches</h1>
-        <p className="games-subtitle">Make your predictions for upcoming matches</p>
+        <div className="header-content">
+          <div>
+            <h1 className="games-title">Matches</h1>
+            <p className="games-subtitle">Make your predictions for upcoming matches</p>
+          </div>
+          {matches.length > 0 && (
+            <div className="total-points">
+              <span className="points-label">Stage Total:</span>
+              <span className="points-value">{calculateTotalPoints()} pts</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {stages.length > 0 && (
@@ -167,6 +192,7 @@ export default function Games() {
                     key={match.id}
                     match={match}
                     isLive={isMatchLive(match)}
+                    onBetPlaced={() => selectedStageId && loadStageMatches(selectedStageId)}
                   />
                 ))}
               </div>

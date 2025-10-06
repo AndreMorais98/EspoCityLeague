@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/api';
+import { analyzeStages, isMatchLive, Stage, Match } from '../../utils/stageUtils';
 import MatchCard from '../../components/MatchCard/MatchCard';
 import './Games.scss';
-
-interface Stage {
-  id: number;
-  name: string;
-  date: string;
-}
 
 interface Team {
   id: number;
@@ -15,17 +10,7 @@ interface Team {
   logo_url?: string;
 }
 
-interface Match {
-  id: number;
-  home_team: Team;
-  away_team: Team;
-  kickoff_at: string;
-  home_score?: number | null;
-  away_score?: number | null;
-  stage: {
-    id: number;
-    name: string;
-  };
+interface MatchWithBet extends Match {
   user_bet?: {
     id: number;
     home_score_prediction: number;
@@ -37,7 +22,9 @@ interface Match {
 export default function Games() {
   const [stages, setStages] = useState<Stage[]>([]);
   const [selectedStageId, setSelectedStageId] = useState<number | null>(null);
-  const [matches, setMatches] = useState<Match[]>([]);
+  const [upcomingStageId, setUpcomingStageId] = useState<number | null>(null);
+  const [pastStageIds, setPastStageIds] = useState<Set<number>>(new Set());
+  const [matches, setMatches] = useState<MatchWithBet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,13 +38,20 @@ export default function Games() {
     }
   }, [selectedStageId]);
 
+
   const loadStages = async () => {
     try {
       setLoading(true);
       const stagesData = await apiService.getStages();
       setStages(stagesData);
+      
       if (stagesData.length > 0) {
-        setSelectedStageId(stagesData[0].id);
+        // Analyze all stages in one go
+        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = await analyzeStages(stagesData);
+        
+        setUpcomingStageId(nextUpcomingStageId);
+        setSelectedStageId(nextUpcomingStageId || stagesData[0].id);
+        setPastStageIds(pastStageIds);
       }
     } catch (err) {
       setError('Failed to load stages');
@@ -80,15 +74,8 @@ export default function Games() {
     }
   };
 
-  const isMatchLive = (match: Match): boolean => {
-    const now = new Date();
-    const kickoff = new Date(match.kickoff_at);
-    const matchEnd = new Date(kickoff.getTime() + 120 * 60000); // 120 minutes after kickoff
-    
-    return now >= kickoff && now <= matchEnd && match.home_score === null;
-  };
 
-  const groupMatchesByDate = (matches: Match[]) => {
+  const groupMatchesByDate = (matches: MatchWithBet[]) => {
     const grouped = matches.reduce((acc, match) => {
       const date = new Date(match.kickoff_at);
       const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD format
@@ -166,6 +153,8 @@ export default function Games() {
               key={stage.id}
               className={`stage-tab ${
                 selectedStageId === stage.id ? 'active' : ''
+              } ${upcomingStageId === stage.id ? 'upcoming' : ''} ${
+                pastStageIds.has(stage.id) ? 'past' : ''
               }`}
               onClick={() => setSelectedStageId(stage.id)}
             >

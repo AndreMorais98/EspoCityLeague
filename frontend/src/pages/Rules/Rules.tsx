@@ -6,7 +6,7 @@ export default function Rules() {
     <div className="rules">
       <div className="rules__header">
         <h1>Game Rules</h1>
-        <p className="rules__subtitle">How to win the EspoCityLeague Championship</p>
+        <p className="rules__subtitle">How to win the Espo City League</p>
       </div>
 
       <div className="rules__content">

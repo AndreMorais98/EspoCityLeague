@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/api';
+import { analyzeStages, Stage, Match } from '../../utils/stageUtils';
 import './OthersBets.scss';
 
 interface Team {
@@ -8,18 +9,6 @@ interface Team {
   logo_url?: string;
 }
 
-interface Match {
-  id: number;
-  home_team: Team;
-  away_team: Team;
-  kickoff_at: string;
-  home_score?: number | null;
-  away_score?: number | null;
-  stage: {
-    id: number;
-    name: string;
-  };
-}
 
 interface Bet {
   id: number;
@@ -33,15 +22,12 @@ interface Bet {
   points_awarded: number;
 }
 
-interface Stage {
-  id: number;
-  name: string;
-  date: string;
-}
 
 export default function OthersBets() {
   const [stages, setStages] = useState<Stage[]>([]);
   const [selectedStageId, setSelectedStageId] = useState<number | null>(null);
+  const [upcomingStageId, setUpcomingStageId] = useState<number | null>(null);
+  const [pastStageIds, setPastStageIds] = useState<Set<number>>(new Set());
   const [bets, setBets] = useState<Bet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -61,8 +47,14 @@ export default function OthersBets() {
     try {
       const stagesData = await apiService.getStages();
       setStages(stagesData);
+      
       if (stagesData.length > 0) {
-        setSelectedStageId(stagesData[0].id);
+        // Analyze all stages in one go
+        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = await analyzeStages(stagesData);
+        
+        setUpcomingStageId(nextUpcomingStageId);
+        setSelectedStageId(nextUpcomingStageId || stagesData[0].id);
+        setPastStageIds(pastStageIds);
       }
     } catch (err) {
       setError('Failed to load stages.');
@@ -161,6 +153,8 @@ export default function OthersBets() {
               key={stage.id}
               className={`stage-tab ${
                 selectedStageId === stage.id ? 'active' : ''
+              } ${upcomingStageId === stage.id ? 'upcoming' : ''} ${
+                pastStageIds.has(stage.id) ? 'past' : ''
               }`}
               onClick={() => setSelectedStageId(stage.id)}
             >

@@ -30,35 +30,35 @@ export default function Sidebar() {
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
         >
           <div className="item__icon">🏆</div>
-          Leaderboard
+          Rankings
         </NavLink>
         <NavLink
           to="/games"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
         >
-          <div className="item__icon">🎮</div>
-          Games
-        </NavLink>
-        <NavLink
-          to="/rules"
-          className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
-        >
-          <div className="item__icon">📋</div>
-          Rules
+          <div className="item__icon">⚽</div>
+          My Predictions
         </NavLink>
         <NavLink
           to="/others-bets"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
         >
           <div className="item__icon">👥</div>
-          Other's Bets
+          Community Predictions
+        </NavLink>
+        <NavLink
+          to="/rules"
+          className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+        >
+          <div className="item__icon">📋</div>
+          Game Rules
         </NavLink>
         <NavLink
           to="/profile"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
         >
           <div className="item__icon">⚙️</div>
-          Profile
+          My Profile
         </NavLink>
       </nav>
       

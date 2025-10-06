@@ -40,6 +40,7 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
   const [awayPredict, setAwayPredict] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const kickoffDate = new Date(match.kickoff_at);
   const now = new Date();
@@ -55,6 +56,15 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
 
   const handlePredictSubmit = async () => {
     if (!user || homePredict === '' || awayPredict === '') {
+      setError('Please enter both home and away predictions');
+      return;
+    }
+
+    const homeScore = parseInt(homePredict);
+    const awayScore = parseInt(awayPredict);
+
+    if (isNaN(homeScore) || isNaN(awayScore) || homeScore < 0 || awayScore < 0) {
+      setError('Please enter valid positive numbers');
       return;
     }
 
@@ -62,34 +72,69 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
     setError(null);
 
     try {
-      const betData = {
-        user_id: user.id,
-        match_id: match.id,
-        home_score_prediction: parseInt(homePredict),
-        away_score_prediction: parseInt(awayPredict),
-      };
-
       if (hasBet && match.user_bet) {
         // Update existing bet
         await apiService.updateBet(match.user_bet.id, {
-          home_score_prediction: parseInt(homePredict),
-          away_score_prediction: parseInt(awayPredict),
+          home_score_prediction: homeScore,
+          away_score_prediction: awayScore,
         });
       } else {
         // Create new bet
+        const betData = {
+          user_id: user.id,
+          match_id: match.id,
+          home_score_prediction: homeScore,
+          away_score_prediction: awayScore,
+        };
         await apiService.createBet(betData);
       }
 
       setHomePredict('');
       setAwayPredict('');
+      setIsEditing(false);
       if (onBetPlaced) {
         onBetPlaced();
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to place bet');
+      console.error('Prediction error:', err);
+      
+      // Handle specific error cases
+      if (err.message.includes('400')) {
+        if (err.message.includes('already exists')) {
+          setError('You already have a prediction for this match');
+        } else if (err.message.includes('non-negative')) {
+          setError('Predictions must be positive numbers');
+        } else if (err.message.includes('after match has started')) {
+          setError('Cannot place or update predictions after match has started');
+        } else {
+          setError('Invalid prediction values');
+        }
+      } else if (err.message.includes('404')) {
+        setError('Match not found');
+      } else if (err.message.includes('401') || err.message.includes('403')) {
+        setError('Please log in to make predictions');
+      } else {
+        setError('Failed to save prediction. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleEditClick = () => {
+    if (match.user_bet) {
+      setHomePredict(match.user_bet.home_score_prediction.toString());
+      setAwayPredict(match.user_bet.away_score_prediction.toString());
+    }
+    setIsEditing(true);
+    setError(null);
+  };
+
+  const handleCancelEdit = () => {
+    setHomePredict('');
+    setAwayPredict('');
+    setIsEditing(false);
+    setError(null);
   };
 
   // Get the card border class based on points
@@ -152,7 +197,7 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
       </div>
 
       {/* Show user's prediction if they have bet */}
-      {hasBet && match.user_bet && (
+      {hasBet && match.user_bet && !isEditing && (
         <div className="bet-info-section">
           <div className="bet-prediction">
             <span className="bet-label">Your Prediction:</span>
@@ -168,18 +213,27 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
                 +{match.user_bet.points_awarded}
               </span>
             )}
+            {!hasStarted && (
+              <button 
+                className="edit-prediction-btn"
+                onClick={handleEditClick}
+                disabled={isSubmitting}
+              >
+                Edit
+              </button>
+            )}
           </div>
         </div>
       )}
 
-      {/* Show prediction input only if match hasn't started and no bet placed yet */}
-      {!hasStarted && !hasBet && (
+      {/* Show prediction input if match hasn't started and (no bet placed yet OR editing existing bet) */}
+      {!hasStarted && (!hasBet || isEditing) && (
         <div className="score-input-section">
           <div className="score-inputs">
             <input
               type="number"
               min="0"
-              placeholder="0"
+              placeholder={hasBet && match.user_bet ? match.user_bet.home_score_prediction.toString() : "0"}
               value={homePredict}
               onChange={(e) => setHomePredict(e.target.value)}
               className="score-input"
@@ -189,7 +243,7 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
             <input
               type="number"
               min="0"
-              placeholder="0"
+              placeholder={hasBet && match.user_bet ? match.user_bet.away_score_prediction.toString() : "0"}
               value={awayPredict}
               onChange={(e) => setAwayPredict(e.target.value)}
               className="score-input"
@@ -197,13 +251,24 @@ export default function MatchCard({ match, isLive = false, onBetPlaced }: MatchC
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button
-            className="predict-button"
-            onClick={handlePredictSubmit}
-            disabled={isSubmitting || homePredict === '' || awayPredict === ''}
-          >
-            {isSubmitting ? 'Submitting...' : 'Predict'}
-          </button>
+          <div className="prediction-actions">
+            <button
+              className="predict-button"
+              onClick={handlePredictSubmit}
+              disabled={isSubmitting || homePredict === '' || awayPredict === ''}
+            >
+              {isSubmitting ? 'Saving...' : (hasBet ? 'Update Prediction' : 'Predict')}
+            </button>
+            {isEditing && (
+              <button
+                className="cancel-button"
+                onClick={handleCancelEdit}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

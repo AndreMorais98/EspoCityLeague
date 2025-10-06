@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/api';
-import { analyzeStages, Stage, Match } from '../../utils/stageUtils';
+import { analyzeStagesByDate, Stage, Match } from '../../utils/stageUtils';
 import './OthersBets.scss';
 
 interface Team {
@@ -49,8 +49,8 @@ export default function OthersBets() {
       setStages(stagesData);
       
       if (stagesData.length > 0) {
-        // Analyze all stages in one go
-        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = await analyzeStages(stagesData);
+        // Analyze all stages in one go (lightweight - no API calls)
+        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = analyzeStagesByDate(stagesData);
         
         setUpcomingStageId(nextUpcomingStageId);
         setSelectedStageId(nextUpcomingStageId || stagesData[0].id);

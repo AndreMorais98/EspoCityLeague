@@ -10,6 +10,36 @@
   top: 0;
   z-index: 1000;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: width 0.3s ease;
+  
+  &.collapsed {
+    width: 80px;
+  }
+}
+
+.sidebar__toggle {
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background: #1e3a8a;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #3730a3;
+    transform: scale(1.1);
+  }
 }
 
 .sidebar__brand {
@@ -19,11 +49,38 @@
   padding: 24px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 24px;
+  transition: all 0.3s ease;
 
   .symbol-bg {
     width: 150px;
     height: 150px;
     color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .brand-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 8px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar.collapsed & {
+    padding: 16px 8px;
+    
+    .symbol-bg {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .brand-text {
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
   }
 }
 
@@ -74,6 +131,27 @@
   font-size: 15px;
   transition: all 0.2s ease;
   position: relative;
+  
+  .item__icon {
+    font-size: 20px;
+    min-width: 20px;
+    text-align: center;
+  }
+  
+  .item__text {
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar.collapsed & {
+    padding: 16px 12px;
+    justify-content: center;
+    
+    .item__text {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+    }
+  }
 }
 
 .sidebar__item:hover { 
@@ -123,6 +201,12 @@
   padding: 12px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  
+  .sidebar.collapsed & {
+    justify-content: center;
+    padding: 12px 8px;
+  }
 }
 
 .user__avatar {
@@ -140,6 +224,13 @@
 
 .user__info {
   flex: 1;
+  transition: opacity 0.3s ease;
+  
+  .sidebar.collapsed & {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+  }
 }
 
 .user__name {
@@ -170,6 +261,11 @@
   font-weight: 500;
   font-size: 14px;
   transition: all 0.2s ease;
+  
+  .sidebar.collapsed & {
+    padding: 12px 8px;
+    font-size: 18px;
+  }
 }
 
 .sidebar__logout:hover {

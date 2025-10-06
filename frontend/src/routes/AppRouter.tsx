@@ -6,6 +6,7 @@ import Leaderboard from '../pages/Leaderboard/Leaderboard';
 import Rules from '../pages/Rules/Rules';
 import Games from '../pages/Games/Games';
 import UserDetails from '../pages/UserDetails/UserDetails';
+import AdminMatches from '../pages/AdminMatches/AdminMatches';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: 'games', element: <Games /> },
       { path: 'others-bets', element: <OthersBets /> },
       { path: 'profile', element: <UserDetails /> },
+      { path: 'admin-matches', element: <AdminMatches /> },
     ],
   },
   { path: '/login', element: <Login /> },

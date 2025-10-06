@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/api';
-import { analyzeStages, isMatchLive, Stage, Match } from '../../utils/stageUtils';
+import { analyzeStagesByDate, isMatchLive, Stage, Match } from '../../utils/stageUtils';
 import MatchCard from '../../components/MatchCard/MatchCard';
 import './Games.scss';
 
@@ -46,8 +46,8 @@ export default function Games() {
       setStages(stagesData);
       
       if (stagesData.length > 0) {
-        // Analyze all stages in one go
-        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = await analyzeStages(stagesData);
+        // Analyze all stages in one go (lightweight - no API calls)
+        const { upcomingStageId: nextUpcomingStageId, pastStageIds } = analyzeStagesByDate(stagesData);
         
         setUpcomingStageId(nextUpcomingStageId);
         setSelectedStageId(nextUpcomingStageId || stagesData[0].id);

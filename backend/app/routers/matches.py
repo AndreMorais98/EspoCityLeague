@@ -1,6 +1,6 @@
 from datetime import datetime, date, timedelta
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlmodel import Session, select
 from app.db import get_session
 from app.models.match import Match, MatchCreate, MatchUpdate, MatchResponse
@@ -34,6 +34,61 @@ def get_match(
     match = session.get(Match, match_id)
     if not match:
         raise HTTPException(status_code=404, detail="Match not found")
+    return match
+
+
+@router.patch("/{match_id}/scores", response_model=MatchResponse)
+def update_match_scores(
+    match_id: int,
+    scores: dict,
+    session: Session = Depends(get_session),
+    current_user: User = Depends(get_current_user)
+) -> MatchResponse:
+    """Update match scores (admin only)"""
+    if not current_user.is_superuser:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only administrators can update match scores"
+        )
+    
+    match = session.get(Match, match_id)
+    if not match:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Match not found"
+        )
+    
+    # Validate scores
+    home_score = scores.get("home_score")
+    away_score = scores.get("away_score")
+    
+    if home_score is None or away_score is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Both home_score and away_score are required"
+        )
+    
+    if not isinstance(home_score, int) or not isinstance(away_score, int):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Scores must be integers"
+        )
+    
+    if home_score < 0 or away_score < 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Scores must be non-negative"
+        )
+    
+    # Update scores
+    match.home_score = home_score
+    match.away_score = away_score
+    match.updated_at = datetime.now()
+    
+    session.add(match)
+    session.commit()
+    session.refresh(match)
+    
     return match
 
 

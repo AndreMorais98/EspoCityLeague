@@ -88,6 +88,9 @@ def upgrade() -> None:
         })
     
     op.bulk_insert(teams_table, teams_insert_data)
+    
+    # Update the sequence to start from the next available ID
+    op.execute("SELECT setval('teams_id_seq', (SELECT MAX(id) FROM teams))")
 
 
 def downgrade() -> None:

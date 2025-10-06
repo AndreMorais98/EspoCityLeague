@@ -56,7 +56,7 @@ def upgrade() -> None:
         {"id": 7, "user_id": 4, "match_id": 2, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
         {"id": 8, "user_id": 2, "match_id": 2, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
         {"id": 9, "user_id": 3, "match_id": 2, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
-        {"id": 10, "user_id": 5, "match_id": 2, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
+        {"id": 10, "user_id": 5, "match_id": 2, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
 
         # Match 3: Juventus VS Dortmund - Actual: 4-4
         {"id": 11, "user_id": 1, "match_id": 3, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
@@ -193,33 +193,33 @@ def upgrade() -> None:
         {"id": 104, "user_id": 3, "match_id": 21, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
         {"id": 105, "user_id": 5, "match_id": 21, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
 
-        # Match 22: Bodo VS Tottenham - Actual: 2-2
-        {"id": 106, "user_id": 1, "match_id": 22, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
-        {"id": 107, "user_id": 4, "match_id": 22, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
-        {"id": 108, "user_id": 2, "match_id": 22, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
-        {"id": 109, "user_id": 3, "match_id": 22, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
-        {"id": 110, "user_id": 5, "match_id": 22, "home_score_prediction": 0, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
-
         # Match 23: Chelsea VS Benfica - Actual: 1-0
-        {"id": 111, "user_id": 1, "match_id": 23, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais YELLOW
-        {"id": 112, "user_id": 4, "match_id": 23, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
-        {"id": 113, "user_id": 2, "match_id": 23, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo YELLOW
-        {"id": 114, "user_id": 3, "match_id": 23, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
-        {"id": 115, "user_id": 5, "match_id": 23, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
-
-        # Match 24: Galatasaray VS Liverpool - Actual: 1-0
-        {"id": 116, "user_id": 1, "match_id": 24, "home_score_prediction": 2, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
-        {"id": 117, "user_id": 4, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
-        {"id": 118, "user_id": 2, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
-        {"id": 119, "user_id": 3, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
-        {"id": 120, "user_id": 5, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
+        {"id": 106, "user_id": 1, "match_id": 22, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
+        {"id": 107, "user_id": 4, "match_id": 22, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
+        {"id": 108, "user_id": 2, "match_id": 22, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
+        {"id": 109, "user_id": 3, "match_id": 22, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
+        {"id": 110, "user_id": 5, "match_id": 22, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
 
         # Match 25: Inter VS Slavia Praga - Actual: 3-0
-        {"id": 121, "user_id": 1, "match_id": 25, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais YELLOW
-        {"id": 122, "user_id": 4, "match_id": 25, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa YELLOW
-        {"id": 123, "user_id": 2, "match_id": 25, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 3, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo GREEN
-        {"id": 124, "user_id": 3, "match_id": 25, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
-        {"id": 125, "user_id": 5, "match_id": 25, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
+        {"id": 111, "user_id": 1, "match_id": 23, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais YELLOW
+        {"id": 112, "user_id": 4, "match_id": 23, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
+        {"id": 113, "user_id": 2, "match_id": 23, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 3, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo YELLOW
+        {"id": 114, "user_id": 3, "match_id": 23, "home_score_prediction": 2, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
+        {"id": 115, "user_id": 5, "match_id": 23, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
+
+        # Match 22: Bodo VS Tottenham - Actual: 2-2
+        {"id": 116, "user_id": 1, "match_id": 24, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
+        {"id": 117, "user_id": 4, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
+        {"id": 118, "user_id": 2, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
+        {"id": 119, "user_id": 3, "match_id": 24, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
+        {"id": 120, "user_id": 5, "match_id": 24, "home_score_prediction": 0, "away_score_prediction": 1, "points_awarded": 0, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
+
+        # Match 24: Galatasaray VS Liverpool - Actual: 1-0
+        {"id": 121, "user_id": 1, "match_id": 25, "home_score_prediction": 2, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais YELLOW
+        {"id": 122, "user_id": 4, "match_id": 25, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa YELLOW
+        {"id": 123, "user_id": 2, "match_id": 25, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo GREEN
+        {"id": 124, "user_id": 3, "match_id": 25, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
+        {"id": 125, "user_id": 5, "match_id": 25, "home_score_prediction": 1, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
 
         # Match 26: Marseilla VS Ajax - Actual: 4-0
         {"id": 126, "user_id": 1, "match_id": 26, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais YELLOW
@@ -256,12 +256,12 @@ def upgrade() -> None:
         {"id": 149, "user_id": 3, "match_id": 30, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
         {"id": 150, "user_id": 5, "match_id": 30, "home_score_prediction": 3, "away_score_prediction": 0, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
 
-        # Match 31: Barcelona VS PSG - Actual: 1-2
-        {"id": 151, "user_id": 1, "match_id": 31, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
-        {"id": 152, "user_id": 4, "match_id": 31, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
-        {"id": 153, "user_id": 2, "match_id": 31, "home_score_prediction": 3, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
-        {"id": 154, "user_id": 3, "match_id": 31, "home_score_prediction": 2, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
-        {"id": 155, "user_id": 5, "match_id": 31, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
+        # Match 31: Monaco VS City - Actual: 2-2
+        {"id": 151, "user_id": 1, "match_id": 31, "home_score_prediction": 0, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
+        {"id": 152, "user_id": 4, "match_id": 31, "home_score_prediction": 0, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
+        {"id": 153, "user_id": 2, "match_id": 31, "home_score_prediction": 0, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
+        {"id": 154, "user_id": 3, "match_id": 31, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
+        {"id": 155, "user_id": 5, "match_id": 31, "home_score_prediction": 0, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
 
         # Match 32: Leverkusen VS PSV - Actual: 1-1
         {"id": 156, "user_id": 1, "match_id": 32, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
@@ -277,12 +277,12 @@ def upgrade() -> None:
         {"id": 164, "user_id": 3, "match_id": 33, "home_score_prediction": 3, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno YELLOW
         {"id": 165, "user_id": 5, "match_id": 33, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago YELLOW
 
-        # Match 34: Monaco VS City - Actual: 2-2
-        {"id": 166, "user_id": 1, "match_id": 34, "home_score_prediction": 0, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
-        {"id": 167, "user_id": 4, "match_id": 34, "home_score_prediction": 0, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
-        {"id": 168, "user_id": 2, "match_id": 34, "home_score_prediction": 0, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
-        {"id": 169, "user_id": 3, "match_id": 34, "home_score_prediction": 1, "away_score_prediction": 3, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
-        {"id": 170, "user_id": 5, "match_id": 34, "home_score_prediction": 0, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
+        # Match 34: Barcelona VS PSG - Actual: 1-2
+        {"id": 166, "user_id": 1, "match_id": 34, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais RED
+        {"id": 167, "user_id": 4, "match_id": 34, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barbosa RED
+        {"id": 168, "user_id": 2, "match_id": 34, "home_score_prediction": 3, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Celo RED
+        {"id": 169, "user_id": 3, "match_id": 34, "home_score_prediction": 2, "away_score_prediction": 2, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Nuno RED
+        {"id": 170, "user_id": 5, "match_id": 34, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 0, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tiago RED
 
         # Match 35: Nápoles VS Sporting - Actual: 2-1
         {"id": 171, "user_id": 1, "match_id": 35, "home_score_prediction": 2, "away_score_prediction": 1, "points_awarded": 3, "created_at": datetime.now(), "updated_at": datetime.now()},  # Morais GREEN
@@ -301,6 +301,9 @@ def upgrade() -> None:
     
     # Insert all bets
     op.bulk_insert(bets_table, bets_data)
+    
+    # Update the sequence to start from the next available ID
+    op.execute("SELECT setval('bets_id_seq', (SELECT MAX(id) FROM bets))")
 
 
 def downgrade() -> None:

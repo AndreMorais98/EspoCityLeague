@@ -363,6 +363,10 @@ def upgrade() -> None:
     
     # Insert matches data
     op.bulk_insert(matches_table, future_matches_data)
+    
+    # Update the sequences to start from the next available IDs
+    op.execute("SELECT setval('stages_id_seq', (SELECT MAX(id) FROM stages))")
+    op.execute("SELECT setval('matches_id_seq', (SELECT MAX(id) FROM matches))")
 
 
 def downgrade() -> None:

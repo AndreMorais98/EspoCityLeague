@@ -120,6 +120,14 @@ class ApiService {
   async getStageBets(stageId: number): Promise<any[]> {
     return this.makeRequest<any[]>(`/stages/${stageId}/bets/`);
   }
+
+  // Admin endpoints
+  async updateMatchScores(matchId: number, scores: { home_score: number; away_score: number }): Promise<any> {
+    return this.makeRequest<any>(`/matches/${matchId}/scores/`, {
+      method: 'PATCH',
+      body: JSON.stringify(scores),
+    });
+  }
 }
 
 export const apiService = new ApiService();

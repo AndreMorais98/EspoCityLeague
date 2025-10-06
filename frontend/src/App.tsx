@@ -1,11 +1,14 @@
 import './App.css';
 import AppRouter from './routes/AppRouter';
 import { UserProvider } from './contexts/UserContext';
+import { SidebarProvider } from './contexts/SidebarContext';
 
 function App() {
   return (
     <UserProvider>
-      <AppRouter />
+      <SidebarProvider>
+        <AppRouter />
+      </SidebarProvider>
     </UserProvider>
   );
 }

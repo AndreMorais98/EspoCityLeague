@@ -7,7 +7,7 @@
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Create React App](https://img.shields.io/badge/Create%20React%20App-09D3AC?style=for-the-badge&logo=create-react-app&logoColor=white)](https://create-react-app.dev/)
 
 </div>
 
@@ -73,7 +73,7 @@ frontend/
 │   ├── App.tsx         # Main App component
 │   └── main.tsx        # Application entry point
 ├── package.json        # Dependencies and scripts
-└── vite.config.ts      # Vite configuration
+└── tsconfig.json       # TypeScript configuration
 ```
 
 ## 🚀 Quick Start
@@ -101,7 +101,7 @@ yarn install
 cp .env.example .env.local
 
 # Edit .env.local with your API URL
-VITE_API_URL=http://localhost:8000
+BACKEND_URL=BACKEND_URL
 ```
 
 ### 3. Start Development Server
@@ -121,10 +121,10 @@ npm run build
 # or
 yarn build
 
-# Preview production build
-npm run preview
+# Serve production build locally
+npx serve -s build
 # or
-yarn preview
+yarn global add serve && serve -s build
 ```
 
 ## 📁 Project Structure
@@ -437,39 +437,14 @@ describe('ComponentName', () => {
 
 ### Build Process
 ```bash
-# Development build
-npm run dev
+# Development server
+npm start
 
 # Production build
 npm run build
 
-# Preview production build
-npm run preview
-```
-
-### Build Configuration
-```typescript
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: true,
-  },
-});
+# Test the application
+npm test
 ```
 
 ### Deployment Options
@@ -481,7 +456,9 @@ export default defineConfig({
 ### Environment Variables
 ```bash
 # .env.local
-BACKEND_URL=BACKEND_URL
+REACT_APP_API_URL=http://localhost:8000
+REACT_APP_APP_NAME=Espo City League
+REACT_APP_VERSION=1.0.0
 ```
 
 ## 🛠️ Development
@@ -511,11 +488,10 @@ npm run lint:fix
 ```json
 {
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,scss}\"",
@@ -537,22 +513,29 @@ npm run lint:fix
 // tsconfig.json
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6"
+    ],
+    "allowJs": true,
     "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  }
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src"
+  ]
 }
 ```
 
@@ -575,7 +558,7 @@ npm run lint:fix
 
 - [React Documentation](https://reactjs.org/docs/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
-- [Vite Documentation](https://vitejs.dev/guide/)
+- [Create React App Documentation](https://create-react-app.dev/)
 - [React Router Documentation](https://reactrouter.com/)
 - [SCSS Documentation](https://sass-lang.com/documentation)
 

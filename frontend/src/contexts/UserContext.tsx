@@ -43,9 +43,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       }
 
       try {
-        console.log('Fetching user info...');
         const userData = await apiService.getCurrentUser();
-        console.log('User data received:', userData);
         setUser(userData);
       } catch (error) {
         console.error('Failed to fetch user info:', error);

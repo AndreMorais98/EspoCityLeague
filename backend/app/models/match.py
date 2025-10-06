@@ -62,7 +62,6 @@ class MatchResponse(MatchBase):
     stage_id: int
     created_at: datetime
     updated_at: datetime
-    stage: "StageResponse"
-    home_team: "TeamResponse"
-    away_team: "TeamResponse"
-    bets: List["BetResponse"] = []
+    
+    class Config:
+        from_attributes = True

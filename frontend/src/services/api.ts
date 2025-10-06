@@ -89,6 +89,19 @@ class ApiService {
   async getMatchById(id: number): Promise<any> {
     return this.makeRequest<any>(`/matches/${id}/`);
   }
+
+  // Stages endpoints
+  async getStages(): Promise<any[]> {
+    return this.makeRequest<any[]>('/stages/');
+  }
+
+  async getStageById(id: number): Promise<any> {
+    return this.makeRequest<any>(`/stages/${id}/`);
+  }
+
+  async getStageMatches(stageId: number): Promise<any[]> {
+    return this.makeRequest<any[]>(`/stages/${stageId}/matches/`);
+  }
 }
 
 export const apiService = new ApiService();

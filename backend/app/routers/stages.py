@@ -105,7 +105,7 @@ def delete_stage(
     return {"message": "Stage deleted successfully"}
 
 
-@router.get("/{stage_id}/matches", response_model=List[Match])
+@router.get("/{stage_id}/matches")
 def get_stage_matches(
     stage_id: int,
     session: Session = Depends(get_session),
@@ -121,4 +121,34 @@ def get_stage_matches(
     
     statement = select(Match).where(Match.stage_id == stage_id).order_by(Match.kickoff_at)
     matches = session.exec(statement).all()
-    return matches
+    
+    # Return matches with their related data
+    return [
+        {
+            "id": match.id,
+            "home_team_id": match.home_team_id,
+            "away_team_id": match.away_team_id,
+            "stage_id": match.stage_id,
+            "kickoff_at": match.kickoff_at,
+            "place": match.place,
+            "home_score": match.home_score,
+            "away_score": match.away_score,
+            "created_at": match.created_at,
+            "updated_at": match.updated_at,
+            "home_team": {
+                "id": match.home_team.id,
+                "name": match.home_team.name,
+                "logo_url": match.home_team.logo_url,
+            },
+            "away_team": {
+                "id": match.away_team.id,
+                "name": match.away_team.name,
+                "logo_url": match.away_team.logo_url,
+            },
+            "stage": {
+                "id": match.stage.id,
+                "name": match.stage.name,
+            }
+        }
+        for match in matches
+    ]

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING, ForwardRef
 from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
@@ -35,4 +35,6 @@ class StageResponse(StageBase):
     id: int
     created_at: datetime
     updated_at: datetime
-    matches: List["MatchResponse"] = []
+    
+    class Config:
+        from_attributes = True

@@ -18,7 +18,6 @@ export default function LoginForm() {
     
     try {
       const response = await login({ username, password });
-      console.log(response);
       setAuthToken(response.access_token);
       // Set user in context from API response
       setUser(response.user);

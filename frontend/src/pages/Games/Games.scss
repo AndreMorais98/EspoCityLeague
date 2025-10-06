@@ -1,0 +1,139 @@
+.games-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.games-header {
+  margin-bottom: 32px;
+}
+
+.games-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.games-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.stage-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+
+    &:hover {
+      background: #555;
+    }
+  }
+}
+
+.stage-tab {
+  padding: 12px 24px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: #4CAF50;
+    color: #4CAF50;
+  }
+
+  &.active {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+
+    &:hover {
+      background: #45a049;
+      border-color: #45a049;
+    }
+  }
+}
+
+.matches-by-date {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.date-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.date-header {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.games-loading {
+  text-align: center;
+  padding: 64px 24px;
+  font-size: 16px;
+  color: #666;
+}
+
+.games-error {
+  text-align: center;
+  padding: 64px 24px;
+  font-size: 16px;
+  color: #f44336;
+  background: #ffebee;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+.no-matches {
+  text-align: center;
+  padding: 64px 24px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  margin-top: 24px;
+
+  p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+  }
+}

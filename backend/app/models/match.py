@@ -1,12 +1,15 @@
-from typing import Optional, List
-from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List, TYPE_CHECKING
+from sqlmodel import SQLModel, Field, Relationship, Column
+from sqlalchemy import Integer, ForeignKey
 from datetime import datetime
+
+if TYPE_CHECKING:
+    from .stage import Stage
+    from .team import Team
+    from .bet import Bet
 
 
 class MatchBase(SQLModel):
-    home_team_id: int = Field(foreign_key="teams.id")
-    away_team_id: int = Field(foreign_key="teams.id")
-    stage_id: int = Field(foreign_key="stages.id", description="Stage this match belongs to")
     kickoff_at: datetime = Field(index=True)
     place: Optional[str] = None
     home_score: Optional[int] = None
@@ -17,14 +20,14 @@ class Match(MatchBase, table=True):
     __tablename__ = "matches"
 
     id: int = Field(default=None, primary_key=True)
+    home_team_id: int = Field(sa_column=Column(Integer, ForeignKey("teams.id", ondelete="RESTRICT"), nullable=False))
+    away_team_id: int = Field(sa_column=Column(Integer, ForeignKey("teams.id", ondelete="RESTRICT"), nullable=False))
+    stage_id: int = Field(sa_column=Column(Integer, ForeignKey("stages.id", ondelete="RESTRICT"), nullable=False))
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     
     # Relationships
-    stage: "Stage" = Relationship(
-        back_populates="matches",
-        sa_relationship_kwargs={"foreign_keys": "[Match.stage_id]"}  # Explicitly specify the foreign key
-    )
+    stage: "Stage" = Relationship(back_populates="matches")
     home_team: "Team" = Relationship(
         back_populates="home_matches",
         sa_relationship_kwargs={"foreign_keys": "[Match.home_team_id]"}
@@ -37,7 +40,9 @@ class Match(MatchBase, table=True):
 
 
 class MatchCreate(MatchBase):
-    pass
+    home_team_id: int
+    away_team_id: int
+    stage_id: int
 
 
 class MatchUpdate(SQLModel):
@@ -52,6 +57,9 @@ class MatchUpdate(SQLModel):
 
 class MatchResponse(MatchBase):
     id: int
+    home_team_id: int
+    away_team_id: int
+    stage_id: int
     created_at: datetime
     updated_at: datetime
     stage: "StageResponse"

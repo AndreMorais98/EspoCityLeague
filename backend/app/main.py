@@ -11,9 +11,9 @@ from .routers.stages import router as stages_router
 # Import models to ensure they're registered with SQLModel
 from .models.user import User
 from .models.team import Team
+from .models.stage import Stage
 from .models.match import Match
 from .models.bet import Bet
-from .models.stage import Stage
 
 
 @asynccontextmanager

@@ -1,6 +1,9 @@
-from typing import Optional, List
+from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime
+
+if TYPE_CHECKING:
+    from .match import Match
 
 
 class Team(SQLModel, table=True):
@@ -20,6 +23,6 @@ class Team(SQLModel, table=True):
         sa_relationship_kwargs={"foreign_keys": "[Match.home_team_id]"}
     )
     away_matches: List["Match"] = Relationship(
-        back_populates="away_team", 
+        back_populates="away_team",
         sa_relationship_kwargs={"foreign_keys": "[Match.away_team_id]"}
     )

@@ -1,6 +1,9 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
+
+if TYPE_CHECKING:
+    from .match import Match, MatchResponse
 
 
 class StageBase(SQLModel):
@@ -9,6 +12,8 @@ class StageBase(SQLModel):
 
 
 class Stage(StageBase, table=True):
+    __tablename__ = "stages"
+    
     id: Optional[int] = Field(default=None, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)

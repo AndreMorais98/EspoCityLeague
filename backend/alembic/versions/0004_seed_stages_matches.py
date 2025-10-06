@@ -1,8 +1,8 @@
-"""Seed stages and matches data
+"""Seed future stages and matches data
 
 Revision ID: 0004_seed_stages_matches
 Revises: 0003_seed_teams
-Create Date: 2025-10-05 20:15:00.000000
+Create Date: 2025-10-05 20:30:00.000000
 
 """
 from typing import Sequence, Union
@@ -20,7 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    """Seed stages and matches tables with initial data."""
+    """Seed future stages and matches tables with data."""
     
     # Create stages table reference
     stages_table = table(
@@ -47,9 +47,9 @@ def upgrade() -> None:
         column('updated_at', sa.DateTime)
     )
     
-    # Stages data
-    stages_data = [
-        {
+    # Future stages data
+    future_stages_data = [
+         {
             "id": 1,
             "name": "Matchday 1",
             "date": datetime(2025, 9, 16),
@@ -63,12 +63,116 @@ def upgrade() -> None:
             "created_at": datetime.now(),
             "updated_at": datetime.now(),
         },
+        {
+            "id": 3,
+            "name": "Matchday 3",
+            "date": datetime(2025, 10, 21, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 4,
+            "name": "Matchday 4",
+            "date": datetime(2025, 11, 4, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 5,
+            "name": "Matchday 5",
+            "date": datetime(2025, 11, 18, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 6,
+            "name": "Matchday 6",
+            "date": datetime(2025, 12, 2, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 7,
+            "name": "Matchday 7",
+            "date": datetime(2025, 12, 16, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 8,
+            "name": "Matchday 8",
+            "date": datetime(2025, 12, 30, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 9,
+            "name": "Knockout Phase Play-offs First Leg",
+            "date": datetime(2026, 1, 14, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 10,
+            "name": "Knockout Phase Play-offs Second Leg",
+            "date": datetime(2026, 1, 21, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 11,
+            "name": "Round of 16 First Leg",
+            "date": datetime(2026, 2, 18, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 12,
+            "name": "Round of 16 Second Leg",
+            "date": datetime(2026, 2, 25, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 13,
+            "name": "Quarter-finals First Leg",
+            "date": datetime(2026, 4, 7, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 14,
+            "name": "Quarter-finals Second Leg",
+            "date": datetime(2026, 4, 14, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 15,
+            "name": "Semi-finals First Leg",
+            "date": datetime(2026, 4, 28, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 16,
+            "name": "Semi-finals Second Leg",
+            "date": datetime(2026, 5, 5, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
+        {
+            "id": 17,
+            "name": "Final",
+            "date": datetime(2026, 5, 30, 0, 0),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+        },
     ]
     
-    # Matches data
-    matches_data = [
-        # Matchday 1
-        {"home_team_id": 34, "away_team_id": 6, "stage_id": 1, "kickoff_at": datetime(2025, 9, 16, 12, 0), "place": None, "home_score": 0, "away_score": 2, "created_at": datetime.now(), "updated_at": datetime.now()},  # Ath Bilbao 0-2 Arsenal
+    # Future matches data
+    future_matches_data = [
+         {"home_team_id": 34, "away_team_id": 6, "stage_id": 1, "kickoff_at": datetime(2025, 9, 16, 12, 0), "place": None, "home_score": 0, "away_score": 2, "created_at": datetime.now(), "updated_at": datetime.now()},  # Ath Bilbao 0-2 Arsenal
         {"home_team_id": 28, "away_team_id": 21, "stage_id": 1, "kickoff_at": datetime(2025, 9, 16, 12, 0), "place": None, "home_score": 1, "away_score": 3, "created_at": datetime.now(), "updated_at": datetime.now()},  # PSV 1-3 Royale Union SG
         {"home_team_id": 24, "away_team_id": 8, "stage_id": 1, "kickoff_at": datetime(2025, 9, 16, 12, 0), "place": None, "home_score": 4, "away_score": 4, "created_at": datetime.now(), "updated_at": datetime.now()},  # Juventus 4-4 Dortmund
         {"home_team_id": 3, "away_team_id": 13, "stage_id": 1, "kickoff_at": datetime(2025, 9, 16, 12, 0), "place": None, "home_score": 2, "away_score": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Real Madrid 2-1 Marseille
@@ -109,16 +213,136 @@ def upgrade() -> None:
         {"home_team_id": 17, "away_team_id": 5, "stage_id": 2, "kickoff_at": datetime(2025, 10, 1, 12, 0), "place": None, "home_score": 1, "away_score": 2, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barcelona 1-2 PSG
         {"home_team_id": 20, "away_team_id": 15, "stage_id": 2, "kickoff_at": datetime(2025, 10, 1, 12, 0), "place": None, "home_score": 2, "away_score": 1, "created_at": datetime.now(), "updated_at": datetime.now()},  # Napoli 2-1 Sporting CP
         {"home_team_id": 27, "away_team_id": 24, "stage_id": 2, "kickoff_at": datetime(2025, 10, 1, 12, 0), "place": None, "home_score": 2, "away_score": 2, "created_at": datetime.now(), "updated_at": datetime.now()},  # Villarreal 2-2 Juventus
+
+        # Matchday 3 (2025-10-21)
+        {"home_team_id": 18, "away_team_id": 35, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Liverpool vs Ajax
+        {"home_team_id": 14, "away_team_id": 25, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Club Brugge vs Bodo/Glimt
+        {"home_team_id": 23, "away_team_id": 28, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Atalanta vs PSV
+        {"home_team_id": 17, "away_team_id": 3, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Barcelona vs Real Madrid
+        {"home_team_id": 7, "away_team_id": 11, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Qarabag vs Atlético Madrid
+        {"home_team_id": 22, "away_team_id": 1, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Galatasaray vs Benfica
+        {"home_team_id": 12, "away_team_id": 16, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Newcastle vs Frankfurt
+        {"home_team_id": 10, "away_team_id": 33, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Tottenham vs Pafos
+        {"home_team_id": 24, "away_team_id": 21, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Juventus vs Royale Union SG
+        {"home_team_id": 26, "away_team_id": 9, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Leverkusen vs Manchester City
+        {"home_team_id": 20, "away_team_id": 4, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Napoli vs Inter
+        {"home_team_id": 8, "away_team_id": 32, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Dortmund vs Slavia Prague
+        {"home_team_id": 15, "away_team_id": 29, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Sporting CP vs FC Copenhagen
+        {"home_team_id": 36, "away_team_id": 27, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Kairat Almaty vs Villarreal
+        {"home_team_id": 31, "away_team_id": 34, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Monaco vs Ath Bilbao
+        {"home_team_id": 30, "away_team_id": 5, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Olympiacos vs PSG
+        {"home_team_id": 19, "away_team_id": 6, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Chelsea vs Arsenal
+        {"home_team_id": 2, "away_team_id": 13, "stage_id": 3, "kickoff_at": datetime(2025, 10, 21, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},  # Bayern Munich vs Marseille
+        
+        # Matchday 4 (2025-11-04)
+        {"home_team_id": 6, "away_team_id": 7, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 4, "away_team_id": 29, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 24, "away_team_id": 10, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 18, "away_team_id": 3, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 21, "away_team_id": 35, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 25, "away_team_id": 19, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 33, "away_team_id": 16, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 8, "away_team_id": 13, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 26, "away_team_id": 31, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 20, "away_team_id": 36, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 34, "away_team_id": 27, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 32, "away_team_id": 1, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 14, "away_team_id": 5, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 2, "away_team_id": 11, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 30, "away_team_id": 15, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 17, "away_team_id": 22, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 23, "away_team_id": 9, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 12, "away_team_id": 28, "stage_id": 4, "kickoff_at": datetime(2025, 11, 4, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        
+        # Matchday 5 (2025-11-18)
+        {"home_team_id": 18, "away_team_id": 25, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 4, "away_team_id": 22, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 32, "away_team_id": 34, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 20, "away_team_id": 29, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 13, "away_team_id": 14, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 9, "away_team_id": 21, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 35, "away_team_id": 6, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 12, "away_team_id": 5, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 16, "away_team_id": 30, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 3, "away_team_id": 28, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 24, "away_team_id": 1, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 31, "away_team_id": 36, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 11, "away_team_id": 33, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 17, "away_team_id": 8, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 2, "away_team_id": 26, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 7, "away_team_id": 27, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 19, "away_team_id": 10, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 23, "away_team_id": 15, "stage_id": 5, "kickoff_at": datetime(2025, 11, 18, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        
+        # Matchday 6 (2025-12-02)
+        {"home_team_id": 15, "away_team_id": 18, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 31, "away_team_id": 10, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 7, "away_team_id": 24, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 2, "away_team_id": 29, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 35, "away_team_id": 9, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 4, "away_team_id": 5, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 34, "away_team_id": 19, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 16, "away_team_id": 25, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 23, "away_team_id": 1, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 30, "away_team_id": 11, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 8, "away_team_id": 6, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 33, "away_team_id": 27, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 36, "away_team_id": 13, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 20, "away_team_id": 12, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 14, "away_team_id": 26, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 22, "away_team_id": 28, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 3, "away_team_id": 32, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 21, "away_team_id": 17, "stage_id": 6, "kickoff_at": datetime(2025, 12, 2, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        
+        # Matchday 7 (2025-12-16)
+        {"home_team_id": 5, "away_team_id": 19, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 9, "away_team_id": 8, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 28, "away_team_id": 36, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 7, "away_team_id": 35, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 21, "away_team_id": 1, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 33, "away_team_id": 20, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 25, "away_team_id": 4, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 26, "away_team_id": 17, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 31, "away_team_id": 11, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 27, "away_team_id": 29, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 34, "away_team_id": 14, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 23, "away_team_id": 10, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 15, "away_team_id": 13, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 18, "away_team_id": 2, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 16, "away_team_id": 32, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 24, "away_team_id": 6, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 22, "away_team_id": 30, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 3, "away_team_id": 12, "stage_id": 7, "kickoff_at": datetime(2025, 12, 16, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        
+        # Matchday 8 (2025-12-30)
+        {"home_team_id": 1, "away_team_id": 33, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 30, "away_team_id": 36, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 26, "away_team_id": 3, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 19, "away_team_id": 20, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 29, "away_team_id": 11, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 32, "away_team_id": 6, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 4, "away_team_id": 7, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 22, "away_team_id": 8, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 2, "away_team_id": 23, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 35, "away_team_id": 28, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 16, "away_team_id": 10, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 5, "away_team_id": 18, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 12, "away_team_id": 25, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 31, "away_team_id": 17, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 34, "away_team_id": 13, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 15, "away_team_id": 14, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 27, "away_team_id": 21, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
+        {"home_team_id": 24, "away_team_id": 9, "stage_id": 8, "kickoff_at": datetime(2025, 12, 30, 12, 0), "place": None, "home_score": None, "away_score": None, "created_at": datetime.now(), "updated_at": datetime.now()},
     ]
-    
+ 
     # Insert stages data
-    op.bulk_insert(stages_table, stages_data)
+    op.bulk_insert(stages_table, future_stages_data)
     
     # Insert matches data
-    op.bulk_insert(matches_table, matches_data)
+    op.bulk_insert(matches_table, future_matches_data)
 
 
 def downgrade() -> None:
-    """Remove seeded stages and matches data."""
-    op.execute("DELETE FROM matches WHERE stage_id IN (1, 2)")
-    op.execute("DELETE FROM stages WHERE id IN (1, 2)")
+    """Remove seeded future stages and matches data."""
+    op.execute("DELETE FROM matches WHERE stage_id BETWEEN 1 AND 17")
+    op.execute("DELETE FROM stages WHERE id BETWEEN 1 AND 17")

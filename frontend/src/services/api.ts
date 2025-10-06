@@ -116,6 +116,10 @@ class ApiService {
   async getStageMatches(stageId: number): Promise<any[]> {
     return this.makeRequest<any[]>(`/stages/${stageId}/matches/`);
   }
+
+  async getStageBets(stageId: number): Promise<any[]> {
+    return this.makeRequest<any[]>(`/stages/${stageId}/bets/`);
+  }
 }
 
 export const apiService = new ApiService();

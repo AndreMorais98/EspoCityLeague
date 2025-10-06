@@ -168,3 +168,67 @@ def get_stage_matches(
         result.append(match_data)
     
     return result
+
+
+@router.get("/{stage_id}/bets")
+def get_stage_bets(
+    stage_id: int,
+    session: Session = Depends(get_session),
+    current_user: User = Depends(get_current_user)
+):
+    """Get all bets for matches in a specific stage"""
+    stage = session.get(Stage, stage_id)
+    if not stage:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Stage not found"
+        )
+    
+    # Get all matches for this stage
+    statement = select(Match).where(Match.stage_id == stage_id)
+    matches = session.exec(statement).all()
+    
+    if not matches:
+        return []
+    
+    # Get all bets for these matches
+    match_ids = [match.id for match in matches]
+    bet_statement = select(Bet).where(Bet.match_id.in_(match_ids)).order_by(Bet.match_id, Bet.user_id)
+    bets = session.exec(bet_statement).all()
+    
+    # Build response with user and match details
+    result = []
+    for bet in bets:
+        bet_data = {
+            "id": bet.id,
+            "user": {
+                "id": bet.user.id,
+                "username": bet.user.username,
+            },
+            "match": {
+                "id": bet.match.id,
+                "home_team": {
+                    "id": bet.match.home_team.id,
+                    "name": bet.match.home_team.name,
+                    "logo_url": bet.match.home_team.logo_url,
+                },
+                "away_team": {
+                    "id": bet.match.away_team.id,
+                    "name": bet.match.away_team.name,
+                    "logo_url": bet.match.away_team.logo_url,
+                },
+                "kickoff_at": bet.match.kickoff_at,
+                "home_score": bet.match.home_score,
+                "away_score": bet.match.away_score,
+                "stage": {
+                    "id": bet.match.stage.id,
+                    "name": bet.match.stage.name,
+                },
+            },
+            "home_score_prediction": bet.home_score_prediction,
+            "away_score_prediction": bet.away_score_prediction,
+            "points_awarded": bet.points_awarded,
+        }
+        result.append(bet_data)
+    
+    return result

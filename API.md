@@ -1,4 +1,4 @@
-# 🔧 EspoCity League API Documentation
+# 🔧 Espo City League API Documentation
 
 ## Base URL
 ```

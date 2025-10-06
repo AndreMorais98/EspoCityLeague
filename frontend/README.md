@@ -1,8 +1,8 @@
-# ⚛️ EspoCity League Frontend
+# ⚛️ Espo City League Frontend
 
 <div align="center">
 
-**React + TypeScript Frontend for EspoCity League Football Prediction Platform**
+**React + TypeScript Frontend for Espo City League Football Prediction Platform**
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -27,7 +27,7 @@
 
 ## 🎯 Overview
 
-The EspoCity League frontend is a modern, responsive React application built with TypeScript that provides an intuitive interface for football prediction management. It features a collapsible sidebar, real-time updates, and a beautiful dark theme.
+The Espo City League frontend is a modern, responsive React application built with TypeScript that provides an intuitive interface for football prediction management. It features a collapsible sidebar, real-time updates, and a beautiful dark theme.
 
 ### 🌟 Key Features
 

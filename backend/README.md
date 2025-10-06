@@ -1,8 +1,8 @@
-# 🚀 EspoCity League Backend
+# 🚀 Espo City League Backend
 
 <div align="center">
 
-**FastAPI Backend for EspoCity League Football Prediction Platform**
+**FastAPI Backend for Espo City League Football Prediction Platform**
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -26,7 +26,7 @@
 
 ## 🎯 Overview
 
-The EspoCity League backend is a modern REST API built with FastAPI that powers the football prediction platform. It provides secure authentication, match management, prediction handling, and real-time scoring calculations.
+The Espo City League backend is a modern REST API built with FastAPI that powers the football prediction platform. It provides secure authentication, match management, prediction handling, and real-time scoring calculations.
 
 ### 🌟 Key Features
 

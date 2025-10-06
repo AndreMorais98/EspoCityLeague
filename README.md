@@ -1,8 +1,8 @@
-# ⚽ EspoCity League
+# ⚽ Espo City League
 
 <div align="center">
 
-![EspoCity League Logo](frontend/public/images/symbol.png)
+![Espo City League Logo](frontend/public/images/symbol.png)
 
 **A modern football prediction league platform built with FastAPI and React**
 
@@ -32,7 +32,7 @@
 
 ## 🎯 Overview
 
-EspoCity League is a comprehensive football prediction platform where users can make predictions on UEFA matches and compete with friends. The platform features real-time match updates, leaderboards, and an intuitive admin panel for match management.
+Espo City League is a comprehensive football prediction platform where users can make predictions on UEFA matches and compete with friends. The platform features real-time match updates, leaderboards, and an intuitive admin panel for match management.
 
 ### 🌟 Key Highlights
 
@@ -345,7 +345,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ by the EspoCity League Team**
+**Made with ❤️ by the Espo City League Team**
 
 [Report Bug](https://github.com/yourusername/espo-city-league/issues) · [Request Feature](https://github.com/yourusername/espo-city-league/issues) · [Documentation](https://github.com/yourusername/espo-city-league/wiki)
 

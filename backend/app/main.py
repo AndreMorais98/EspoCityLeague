@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,12 +25,13 @@ async def lifespan(app: FastAPI):
     yield
     # Shutdown: nothing yet
 
+cors_origins = os.getenv("CORS_ORIGIN", "http://localhost:3000, http://localhost:5173")
 
 app = FastAPI(title="EspoCityLeague API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=[cors_origins],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

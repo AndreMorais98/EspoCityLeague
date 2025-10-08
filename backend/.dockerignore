@@ -32,9 +32,6 @@ coverage.xml
 .git/
 .gitignore
 
-# Node (if present)
-node_modules/
-
 # Keep these
 !Dockerfile
 !pyproject.toml

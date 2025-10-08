@@ -1,0 +1,25 @@
+# Virtual environments
+.venv/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# Editors/OS
+.DS_Store
+.idea/
+.vscode/
+
+# VCS
+.git/
+.gitignore
+
+# Node (if present)
+node_modules/
+
+# Keep these
+!Dockerfile
+!package-lock.json
+!package.json
+s

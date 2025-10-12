@@ -37,14 +37,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router)
-app.include_router(teams_router)
-app.include_router(matches_router)
-app.include_router(bets_router)
-app.include_router(leaderboard_router)
-app.include_router(stages_router)
+app.include_router(auth_router, prefix="/api")
+app.include_router(teams_router, prefix="/api")
+app.include_router(matches_router, prefix="/api")
+app.include_router(bets_router, prefix="/api")
+app.include_router(leaderboard_router, prefix="/api")
+app.include_router(stages_router, prefix="/api")
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health() -> dict:
     return {"status": "ok"}

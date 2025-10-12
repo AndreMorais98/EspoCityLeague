@@ -1,6 +1,6 @@
 import { getAuthToken, User } from './auth';
 
-const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com';
+const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
 
 interface ApiResponse<T> {
   data: T;

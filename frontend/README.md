@@ -177,27 +177,6 @@ yarn global add serve && serve -s build
 - **Performance Metrics**: Win/loss statistics
 - **Visual Indicators**: Color-coded performance
 
-### Contexts (`src/contexts/`)
-
-#### UserContext
-```typescript
-interface UserContextType {
-  user: User | null;
-  setUser: (user: User | null) => void;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-}
-```
-
-#### SidebarContext
-```typescript
-interface SidebarContextType {
-  isCollapsed: boolean;
-  setIsCollapsed: (collapsed: boolean) => void;
-  toggleSidebar: () => void;
-}
-```
-
 ## 🌐 API Integration
 
 ### Authentication Flow

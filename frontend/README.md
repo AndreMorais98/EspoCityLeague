@@ -23,6 +23,7 @@
 - [🧪 Testing](#-testing)
 - [📦 Build & Deployment](#-build--deployment)
 - [🛠️ Development](#️-development)
+- [🤝 Contributing](#-contributing)
 
 ## 🎯 Overview
 
@@ -571,14 +572,23 @@ npm run lint:fix
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request
+We welcome contributions to the frontend! Please follow these steps:
 
-For detailed contribution guidelines, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Make your changes** following the existing code style
+4. **Add tests** for new functionality
+5. **Run the test suite** (`npm test`)
+6. **Format code** (`npm run format`)
+7. **Submit a pull request**
+
+### Development Guidelines
+- Follow existing code style and patterns (ESLint + Prettier)
+- Write tests for new components using React Testing Library
+- Use TypeScript for all new code
+- Update component documentation as needed
+- Ensure all tests pass before submitting
+- Follow the existing SCSS architecture for styling
 
 ## 📄 License
 

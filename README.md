@@ -19,16 +19,11 @@
 - [🎯 Overview](#-overview)
 - [📸 Screenshots](#-screenshots)
 - [✨ Features](#-features)
-- [🏗️ Architecture](#️-architecture)
 - [🚀 Quick Start](#-quick-start)
-- [📁 Project Structure](#-project-structure)
-- [🔧 API Documentation](#-api-documentation)
 - [🎮 Usage Guide](#-usage-guide)
-- [👥 User Roles](#-user-roles)
 - [🏆 Scoring System](#-scoring-system)
+- [📁 Project Structure](#-project-structure)
 - [🛠️ Development](#️-development)
-- [📦 Deployment](#-deployment)
-- [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
 ## 🎯 Overview
@@ -113,40 +108,6 @@ Espo City League is a comprehensive football prediction platform where users can
 - **Smooth Animations**: Polished user experience
 - **Tooltips & Help**: Contextual guidance throughout the app
 
-## 🏗️ Architecture
-
-### Backend (FastAPI)
-```
-backend/
-├── app/
-│   ├── models/          # SQLModel database models
-│   ├── routers/         # API route handlers
-│   ├── dependencies/    # Authentication & database
-│   └── db/             # Database configuration
-├── alembic/            # Database migrations
-└── requirements.txt    # Python dependencies
-```
-
-### Frontend (React + TypeScript)
-```
-frontend/
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/         # Page components
-│   ├── contexts/      # React context providers
-│   ├── services/      # API service layer
-│   ├── utils/         # Utility functions
-│   └── styles/        # Global styles
-├── public/            # Static assets
-└── package.json       # Node.js dependencies
-```
-
-### Database Schema
-- **Users**: Authentication and profile data
-- **Teams**: Football team information
-- **Stages**: Matchday/stage organization
-- **Matches**: Match details and results
-- **Bets**: User predictions and scoring
 
 ## 🚀 Quick Start
 
@@ -228,42 +189,6 @@ espo-city-league/
 └── 📄 README.md             # This file
 ```
 
-## 🔧 API Documentation
-
-### Authentication Endpoints
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user profile
-- `PUT /api/auth/me` - Update current user profile
-
-### Match Endpoints
-- `GET /api/matches/` - List all matches
-- `GET /api/matches/{id}` - Get match details
-- `PATCH /api/matches/{id}/scores` - Update match scores (admin)
-- `POST /api/matches/` - Create new match (admin)
-- `PUT /api/matches/{id}` - Update match (admin)
-
-### Prediction Endpoints
-- `POST /api/bets/` - Create new prediction
-- `PATCH /api/bets/{id}` - Update existing prediction
-- `GET /api/bets/user/{user_id}` - Get user predictions
-- `GET /api/bets/` - List all bets
-
-### Stage Endpoints
-- `GET /api/stages/` - List all stages
-- `GET /api/stages/{id}/matches` - Get stage matches
-- `GET /api/stages/{id}/bets` - Get stage predictions
-- `POST /api/stages/` - Create new stage (admin)
-
-### Team Endpoints
-- `GET /api/teams/` - List all teams
-- `GET /api/teams/{id}` - Get team details
-- `POST /api/teams/` - Create new team (admin)
-
-### Leaderboard Endpoints
-- `GET /api/leaderboard/` - Get user rankings
-
-### Health Endpoint
-- `GET /api/health` - API health check
 
 ## 🎮 Usage Guide
 
@@ -334,46 +259,10 @@ The application screenshots are already included in the README, showcasing:
 
 Screenshots are located in `docs/screenshots/` and automatically displayed in this README.
 
-### Backend Development
-```bash
-cd backend
+For detailed development instructions:
 
-# Run tests
-pytest
-
-# Format code
-black .
-
-# Type checking
-mypy .
-
-# Database migration
-alembic revision --autogenerate -m "Description"
-alembic upgrade head
-```
-
-### Frontend Development
-```bash
-cd frontend
-
-# Run tests
-npm test
-
-# Build for production
-npm run build
-
-# Lint code
-npm run lint
-
-# Type checking
-npm run type-check
-```
-
-### Code Quality
-- **Backend**: Black, MyPy, Pytest
-- **Frontend**: ESLint, Prettier, TypeScript
-- **Database**: Alembic migrations
-- **API**: FastAPI automatic documentation
+- **Backend Development**: See [backend/README.md](backend/README.md)
+- **Frontend Development**: See [frontend/README.md](frontend/README.md)
 
 ## 📦 Deployment
 
@@ -392,21 +281,6 @@ docker-compose -f docker-compose.prod.yml up -d
 3. **Database**: Set up PostgreSQL instance
 4. **Environment**: Configure production environment variables
 
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Development Guidelines
-- Follow existing code style and patterns
-- Write tests for new features
-- Update documentation as needed
-- Ensure all tests pass before submitting
 
 ## 📄 License
 
@@ -418,13 +292,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **React** - A JavaScript library for building user interfaces
 - **PostgreSQL** - The world's most advanced open source relational database
 - **UEFA** - For providing the football match data inspiration
-
----
-
-<div align="center">
-
-**Made with ❤️ by the Espo City League Team**
-
-[Report Bug](https://github.com/yourusername/espo-city-league/issues) · [Request Feature](https://github.com/yourusername/espo-city-league/issues) · [Documentation](https://github.com/yourusername/espo-city-league/wiki)
-
-</div>

@@ -23,6 +23,7 @@
 - [🧪 Testing](#-testing)
 - [📦 Deployment](#-deployment)
 - [🛠️ Development](#️-development)
+- [🤝 Contributing](#-contributing)
 
 ## 🎯 Overview
 
@@ -455,14 +456,22 @@ app.add_middleware(
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request
+We welcome contributions to the backend! Please follow these steps:
 
-For detailed contribution guidelines, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Make your changes** following the existing code style
+4. **Add tests** for new functionality
+5. **Run the test suite** (`pytest`)
+6. **Format code** (`black .`)
+7. **Submit a pull request**
+
+### Development Guidelines
+- Follow existing code style and patterns (Black formatting)
+- Write tests for new features using pytest
+- Update API documentation as needed
+- Ensure all tests pass before submitting
+- Use type hints with MyPy for better code quality
 
 ## 📄 License
 

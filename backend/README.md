@@ -20,10 +20,9 @@
 - [🔧 API Endpoints](#-api-endpoints)
 - [🗄️ Database Models](#️-database-models)
 - [🔐 Authentication](#-authentication)
-- [🧪 Testing](#-testing)
 - [📦 Deployment](#-deployment)
 - [🛠️ Development](#️-development)
-- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ## 🎯 Overview
 
@@ -81,27 +80,7 @@ backend/
 ### 1. Environment Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/espo-city-league.git
-cd espo-city-league/backend
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 2. Database Setup
-```bash
-# Create PostgreSQL database
-createdb espo_city_league
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your database credentials:
-# DATABASE_URL=postgresql://username:password@localhost/espo_city_league
-# SECRET_KEY=your-secret-key-here
+docker-compose up --build
 ```
 
 ### 3. Run Migrations
@@ -117,9 +96,15 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### 5. Access the API
+
+#### Local Development
 - **API Base**: http://localhost:8000/api
 - **Interactive Docs**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
+
+#### Production Server
+- **Live API**: https://espocity-league.mooo.com/api
+- **Live Frontend**: https://espocity-league.mooo.com
 
 ## 📁 Project Structure
 
@@ -254,77 +239,6 @@ class Bet(SQLModel, table=True):
 4. Client includes token in Authorization header
 5. Server validates token on each request
 
-### Example Usage
-```python
-# Login request
-{
-    "username": "user",
-    "password": "password123"
-}
-
-# Response
-{
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-    "token_type": "bearer",
-    "user": {
-        "id": 1,
-        "username": "user",
-        "email": "user@example.com",
-        "is_superuser": false
-    }
-}
-```
-
-## 🧪 Testing
-
-### Running Tests
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=app --cov-report=html
-
-# Run specific test file
-pytest tests/test_auth.py
-
-# Run with verbose output
-pytest -v
-```
-
-### Test Structure
-```python
-# tests/test_auth.py
-import pytest
-from fastapi.testclient import TestClient
-from app.main import app
-
-client = TestClient(app)
-
-def test_login_success():
-    """Test successful user login."""
-    response = client.post("/auth/login", json={
-        "username": "testuser",
-        "password": "testpass"
-    })
-    assert response.status_code == 200
-    assert "access_token" in response.json()
-
-def test_login_invalid_credentials():
-    """Test login with invalid credentials."""
-    response = client.post("/auth/login", json={
-        "username": "testuser",
-        "password": "wrongpass"
-    })
-    assert response.status_code == 401
-```
-
-### Test Database
-- Uses separate test database
-- Automatic cleanup after tests
-- Fixtures for common test data
-- Mock external dependencies
-
 ## 📦 Deployment
 
 ### Environment Variables
@@ -342,20 +256,6 @@ ADMIN_PASSWORD=ADMIN_PASSWORD
 JWT_SECRET=JWT_SECRET
 ```
 
-### Docker Deployment
-```dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
 ### Production Considerations
 - Use environment variables for configuration
 - Set up proper logging
@@ -366,21 +266,6 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 - Set up monitoring and health checks
 
 ## 🛠️ Development
-
-### Code Quality Tools
-```bash
-# Format code
-black .
-
-# Sort imports
-isort .
-
-# Type checking
-mypy .
-
-# Lint code
-flake8 .
-```
 
 ### Database Migrations
 ```bash
@@ -416,36 +301,6 @@ uvicorn app.main:app --reload --log-level debug
 - Get matches: `GET /api/matches/`
 - Health check: `GET /api/health`
 
-## 🔧 Configuration
-
-### Database Configuration
-```python
-# app/db/database.py
-from sqlmodel import SQLModel, create_engine
-from app.core.config import settings
-
-engine = create_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,  # Log SQL queries in debug mode
-    pool_pre_ping=True,   # Verify connections before use
-    pool_recycle=300,     # Recycle connections every 5 minutes
-)
-```
-
-### CORS Configuration
-```python
-# app/main.py
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-```
-
 ## 📚 Additional Resources
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
@@ -454,35 +309,7 @@ app.add_middleware(
 - [Alembic Documentation](https://alembic.sqlalchemy.org/)
 - [Pytest Documentation](https://docs.pytest.org/)
 
-## 🤝 Contributing
-
-We welcome contributions to the backend! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Make your changes** following the existing code style
-4. **Add tests** for new functionality
-5. **Run the test suite** (`pytest`)
-6. **Format code** (`black .`)
-7. **Submit a pull request**
-
-### Development Guidelines
-- Follow existing code style and patterns (Black formatting)
-- Write tests for new features using pytest
-- Update API documentation as needed
-- Ensure all tests pass before submitting
-- Use type hints with MyPy for better code quality
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
-
----
-
-<div align="center">
-
-**Built with ❤️ using FastAPI**
-
-[Report Bug](https://github.com/yourusername/espo-city-league/issues) · [Request Feature](https://github.com/yourusername/espo-city-league/issues)
-
-</div>

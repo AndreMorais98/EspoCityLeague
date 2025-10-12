@@ -17,13 +17,12 @@
 ## 📋 Table of Contents
 
 - [🎯 Overview](#-overview)
+- [🌐 Try the Live Application](#-try-the-live-application)
 - [📸 Screenshots](#-screenshots)
 - [✨ Features](#-features)
 - [🚀 Quick Start](#-quick-start)
 - [🎮 Usage Guide](#-usage-guide)
 - [🏆 Scoring System](#-scoring-system)
-- [📁 Project Structure](#-project-structure)
-- [🛠️ Development](#️-development)
 - [📄 License](#-license)
 
 ## 🎯 Overview
@@ -38,6 +37,10 @@ Espo City League is a comprehensive football prediction platform where users can
 - **Admin Dashboard**: Manage matches and update results
 - **Responsive Design**: Works seamlessly on desktop and mobile
 - **Collapsible Sidebar**: Space-efficient navigation
+
+## 🌐 Try the Live Application
+
+**Ready to play?** Visit the live application at [https://espocity-league.mooo.com/login](https://espocity-league.mooo.com/login)
 
 ## 📸 Screenshots
 
@@ -111,7 +114,9 @@ Espo City League is a comprehensive football prediction platform where users can
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🛠️ Local Development Setup
+
+#### Prerequisites
 - Python 3.9+
 - Node.js 16+
 - PostgreSQL 13+
@@ -127,68 +132,22 @@ cd espo-city-league
 ```bash
 cd backend
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your database credentials
-
-# Run database migrations
-alembic upgrade head
-
-# Start the development server
-uvicorn app.main:app --reload
+# Run with Docker Compose
+docker-compose up --build
 ```
 
 ### 3. Frontend Setup
 ```bash
 cd frontend
 
-# Install dependencies
-npm install
-
-# Start the development server
-npm start
+# Run with Docker Compose
+docker-compose up --build
 ```
 
 ### 4. Access the Application
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000/api
 - **API Docs**: http://localhost:8000/docs
-
-## 📁 Project Structure
-
-```
-espo-city-league/
-├── 📁 backend/                 # FastAPI backend
-│   ├── 📁 app/
-│   │   ├── 📁 models/         # Database models
-│   │   ├── 📁 routers/        # API endpoints
-│   │   ├── 📁 dependencies/   # Auth & DB deps
-│   │   └── 📁 db/            # Database config
-│   ├── 📁 alembic/           # Database migrations
-│   └── 📄 requirements.txt   # Python deps
-├── 📁 frontend/               # React frontend
-│   ├── 📁 src/
-│   │   ├── 📁 components/    # UI components
-│   │   ├── 📁 pages/        # Page components
-│   │   ├── 📁 contexts/     # React contexts
-│   │   ├── 📁 services/     # API services
-│   │   └── 📁 utils/        # Utilities
-│   └── 📄 package.json      # Node deps
-├── 📁 docs/                  # Documentation & Screenshots
-│   ├── 📁 screenshots/      # Application screenshots
-│   ├── 📄 README.md         # Screenshot documentation
-│   ├── 📄 screenshot-preview.html # Preview template
-│   └── 📄 create-placeholders.py  # Placeholder generator
-└── 📄 README.md             # This file
-```
-
 
 ## 🎮 Usage Guide
 
@@ -243,52 +202,7 @@ The platform uses a color-coded scoring system:
 - **Actual**: Arsenal 3-0 Chelsea → **1 point** (YELLOW - correct Arsenal win)
 - **Actual**: Chelsea 1-0 Arsenal → **0 points** (RED - wrong result)
 
-## 🛠️ Development
-
-### 📸 Screenshots
-
-The application screenshots are already included in the README, showcasing:
-
-- **Match Predictions**: Interface for making predictions
-- **Community Predictions**: Viewing other players' bets
-- **Leaderboard**: Real-time rankings and scores
-- **Admin Dashboard**: Match management interface
-- **User Profile**: Account settings and management
-- **Game Rules**: Scoring system explanation
-- **Multiple Prediction Views**: Different interfaces for predictions
-
-Screenshots are located in `docs/screenshots/` and automatically displayed in this README.
-
-For detailed development instructions:
-
-- **Backend Development**: See [backend/README.md](backend/README.md)
-- **Frontend Development**: See [frontend/README.md](frontend/README.md)
-
-## 📦 Deployment
-
-### Docker Deployment
-```bash
-# Build and run with Docker Compose
-docker-compose up --build
-
-# Production deployment
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-### Manual Deployment
-1. **Backend**: Deploy to your preferred Python hosting (Railway, Heroku, etc.)
-2. **Frontend**: Build and deploy to Vercel, Netlify, or similar
-3. **Database**: Set up PostgreSQL instance
-4. **Environment**: Configure production environment variables
-
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **FastAPI** - Modern, fast web framework for building APIs
-- **React** - A JavaScript library for building user interfaces
-- **PostgreSQL** - The world's most advanced open source relational database
-- **UEFA** - For providing the football match data inspiration

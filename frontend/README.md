@@ -16,14 +16,9 @@
 - [🏗️ Architecture](#️-architecture)
 - [🚀 Quick Start](#-quick-start)
 - [📁 Project Structure](#-project-structure)
-- [🎨 UI Components](#-ui-components)
-- [🔧 State Management](#-state-management)
 - [🌐 API Integration](#-api-integration)
 - [🎨 Styling](#-styling)
-- [🧪 Testing](#-testing)
-- [📦 Build & Deployment](#-build--deployment)
-- [🛠️ Development](#️-development)
-- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ## 🎯 Overview
 
@@ -127,6 +122,10 @@ npx serve -s build
 yarn global add serve && serve -s build
 ```
 
+### 5. Live Application
+- **Production URL**: [https://espocity-league.mooo.com](https://espocity-league.mooo.com)
+- **Login Page**: [https://espocity-league.mooo.com/login](https://espocity-league.mooo.com/login)
+
 ## 📁 Project Structure
 
 ### Components (`src/components/`)
@@ -199,132 +198,7 @@ interface SidebarContextType {
 }
 ```
 
-## 🎨 UI Components
-
-### Component Structure
-```typescript
-// Example component structure
-import React, { useState, useEffect } from 'react';
-import { useUser } from '../../contexts/UserContext';
-import { apiService } from '../../services/api';
-import './ComponentName.scss';
-
-interface ComponentNameProps {
-  title: string;
-  onAction?: () => void;
-}
-
-export default function ComponentName({ title, onAction }: ComponentNameProps) {
-  const { user } = useUser();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // Component logic here
-  }, []);
-
-  return (
-    <div className="component-name">
-      <h2>{title}</h2>
-      {/* Component content */}
-    </div>
-  );
-}
-```
-
-### Styling Convention
-```scss
-// ComponentName.scss
-.component-name {
-  padding: 16px;
-  background: var(--background-color);
-  
-  &__title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  
-  &__button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    
-    &:hover {
-      background: var(--primary-hover-color);
-    }
-  }
-}
-```
-
-## 🔧 State Management
-
-### Context Providers
-- **UserContext**: Global user authentication state
-- **SidebarContext**: Sidebar collapse/expand state
-- **ThemeContext**: Future theme management
-
-### State Patterns
-```typescript
-// Local state for component-specific data
-const [loading, setLoading] = useState(false);
-const [data, setData] = useState<DataType[]>([]);
-
-// Context state for global data
-const { user, setUser } = useUser();
-const { isCollapsed, toggleSidebar } = useSidebar();
-```
-
-### Data Flow
-1. **API Calls**: Centralized in `services/api.ts`
-2. **State Updates**: Through context providers
-3. **Component Re-renders**: Automatic with React hooks
-4. **Error Handling**: Try-catch blocks with user feedback
-
 ## 🌐 API Integration
-
-### API Service Layer
-```typescript
-// services/api.ts
-class ApiService {
-  private baseURL: string = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
-  private token: string | null = null;
-
-  async login(username: string, password: string): Promise<LoginResponse> {
-    const response = await this.makeRequest<LoginResponse>('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-    });
-    
-    this.token = response.access_token;
-    return response;
-  }
-
-  async getStages(): Promise<Stage[]> {
-    return this.makeRequest<Stage[]>('/stages/');
-  }
-
-  // All API calls are automatically prefixed with /api
-  // Examples:
-  // - /auth/login becomes /api/auth/login
-  // - /stages/ becomes /api/stages/
-  // - /matches/ becomes /api/matches/
-}
-```
-
-### Error Handling
-```typescript
-// Centralized error handling
-try {
-  const data = await apiService.getStages();
-  setStages(data);
-} catch (error: any) {
-  console.error('Error loading stages:', error);
-  setError(error.message || 'Failed to load stages');
-}
-```
 
 ### Authentication Flow
 1. **Login**: Store JWT token in service
@@ -381,84 +255,6 @@ try {
 }
 ```
 
-## 🧪 Testing
-
-### Running Tests
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test ComponentName.test.tsx
-```
-
-### Test Structure
-```typescript
-// ComponentName.test.tsx
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { UserProvider } from '../../contexts/UserContext';
-import ComponentName from './ComponentName';
-
-const renderWithProviders = (component: React.ReactElement) => {
-  return render(
-    <BrowserRouter>
-      <UserProvider>
-        {component}
-      </UserProvider>
-    </BrowserRouter>
-  );
-};
-
-describe('ComponentName', () => {
-  it('renders title correctly', () => {
-    renderWithProviders(<ComponentName title="Test Title" />);
-    expect(screen.getByText('Test Title')).toBeInTheDocument();
-  });
-
-  it('handles user interaction', () => {
-    const mockAction = jest.fn();
-    renderWithProviders(<ComponentName title="Test" onAction={mockAction} />);
-    
-    fireEvent.click(screen.getByRole('button'));
-    expect(mockAction).toHaveBeenCalledTimes(1);
-  });
-});
-```
-
-### Testing Tools
-- **React Testing Library**: Component testing utilities
-- **Jest**: Test runner and assertion library
-- **MSW**: API mocking for integration tests
-- **Testing Utilities**: Custom render functions with providers
-
-## 📦 Build & Deployment
-
-### Build Process
-```bash
-# Development server
-npm start
-
-# Production build
-npm run build
-
-# Test the application
-npm test
-```
-
-### Deployment Options
-- **Vercel**: Zero-config deployment with automatic builds
-- **Netlify**: Static site hosting with form handling
-- **GitHub Pages**: Free hosting for public repositories
-- **Docker**: Containerized deployment
-
 ### Environment Variables
 ```bash
 # .env.local
@@ -469,98 +265,6 @@ REACT_APP_VERSION=1.0.0
 
 **Note**: The API URL should include the `/api` prefix as all backend endpoints are now prefixed with `/api`.
 
-## 🛠️ Development
-
-### Development Tools
-```bash
-# Code formatting
-npm run format
-
-# Linting
-npm run lint
-
-# Type checking
-npm run type-check
-
-# Fix linting issues
-npm run lint:fix
-```
-
-### Code Quality
-- **ESLint**: Code linting with React and TypeScript rules
-- **Prettier**: Code formatting for consistency
-- **TypeScript**: Static type checking
-- **Husky**: Git hooks for pre-commit checks
-
-### Development Scripts
-```json
-{
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,scss}\"",
-    "type-check": "tsc --noEmit"
-  }
-}
-```
-
-### Hot Reload
-- **Fast Refresh**: Instant component updates during development
-- **CSS Hot Reload**: Immediate style changes
-- **TypeScript**: Real-time type checking
-- **Error Overlay**: Clear error messages in browser
-
-## 🔧 Configuration
-
-### TypeScript Configuration
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es6"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
-}
-```
-
-### ESLint Configuration
-```json
-// .eslintrc.json
-{
-  "extends": [
-    "react-app",
-    "react-app/jest"
-  ],
-  "rules": {
-    "react-hooks/exhaustive-deps": "warn",
-    "@typescript-eslint/no-unused-vars": "error"
-  }
-}
-```
 
 ## 📚 Additional Resources
 
@@ -570,36 +274,7 @@ npm run lint:fix
 - [React Router Documentation](https://reactrouter.com/)
 - [SCSS Documentation](https://sass-lang.com/documentation)
 
-## 🤝 Contributing
-
-We welcome contributions to the frontend! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Make your changes** following the existing code style
-4. **Add tests** for new functionality
-5. **Run the test suite** (`npm test`)
-6. **Format code** (`npm run format`)
-7. **Submit a pull request**
-
-### Development Guidelines
-- Follow existing code style and patterns (ESLint + Prettier)
-- Write tests for new components using React Testing Library
-- Use TypeScript for all new code
-- Update component documentation as needed
-- Ensure all tests pass before submitting
-- Follow the existing SCSS architecture for styling
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
-
----
-
-<div align="center">
-
-**Built with ❤️ using React + TypeScript**
-
-[Report Bug](https://github.com/yourusername/espo-city-league/issues) · [Request Feature](https://github.com/yourusername/espo-city-league/issues)
-
-</div>

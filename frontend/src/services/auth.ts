@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.BACKEND_URL || 'http://ec2-18-153-117-72.eu-central-1.compute.amazonaws.com:80';
+const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com';
 
 interface LoginCredentials {
   username: string;

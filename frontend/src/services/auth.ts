@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.BACKEND_URL || 'http://ec2-18-153-117-72.eu-central-1.compute.amazonaws.com:80';
+
 interface LoginCredentials {
   username: string;
   password: string;
@@ -19,7 +21,7 @@ interface AuthResponse {
 }
 
 export async function login({ username, password }: LoginCredentials): Promise<AuthResponse> {
-  const response = await fetch('http://localhost:8000/auth/login', {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,7 +30,7 @@ export async function login({ username, password }: LoginCredentials): Promise<A
   });
   
   if (!response.ok) {
-    throw new Error('Invalid credentials');
+    throw new Error(`Login failed: ${response.status} ${response.statusText}`);
   }
   
   return response.json();
@@ -56,7 +58,7 @@ export async function getCurrentUser(): Promise<User> {
     throw new Error('No authentication token found');
   }
 
-  const response = await fetch('http://localhost:8000/auth/me', {
+  const response = await fetch(`${API_BASE_URL}/auth/me`, {
     headers: {
       'Authorization': `Bearer ${token}`,
     },

@@ -46,10 +46,21 @@ Espo City League is a comprehensive football prediction platform where users can
 
 ## 📸 Screenshots
 
-### 🎮 Match Predictions
+### 🏆 Rankings
 <div align="center">
-  <img src="docs/screenshots/predicitons1.png" alt="Match Predictions Interface" width="800"/>
+  <img src="docs/screenshots/leaderboard.png" alt="Leaderboard" width="800"/>
+  <p><em>Real-time leaderboard with scoring and rankings</em></p>
+</div>
+
+### ⚽ My Predictions
+<div align="center">
+  <img src="docs/screenshots/predicitons1.png" alt="My Predictions Interface" width="800"/>
   <p><em>Making predictions on upcoming matches with intuitive interface</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/screenshots/predicitons2.png" alt="Predictions Overview" width="800"/>
+  <p><em>Alternative view of match predictions and upcoming games</em></p>
 </div>
 
 ### 👥 Community Predictions
@@ -58,35 +69,24 @@ Espo City League is a comprehensive football prediction platform where users can
   <p><em>Viewing other players' predictions and community engagement</em></p>
 </div>
 
-### 🏆 Leaderboard
-<div align="center">
-  <img src="docs/screenshots/leaderboard.png" alt="Leaderboard" width="800"/>
-  <p><em>Real-time leaderboard with scoring and rankings</em></p>
-</div>
-
-### 👨‍💼 Admin Dashboard
-<div align="center">
-  <img src="docs/screenshots/manage.png" alt="Admin Match Management" width="800"/>
-  <p><em>Admin interface for managing matches and updating results</em></p>
-</div>
-
-### 👤 User Profile
-<div align="center">
-  <img src="docs/screenshots/profile.png" alt="User Profile" width="800"/>
-  <p><em>User profile management and account settings</em></p>
-</div>
-
 ### 📋 Game Rules
 <div align="center">
   <img src="docs/screenshots/rules.png" alt="Game Rules" width="800"/>
   <p><em>Clear explanation of scoring system and game rules</em></p>
 </div>
 
-### 🎯 Additional Predictions View
+### ⚙️ User Profile
 <div align="center">
-  <img src="docs/screenshots/predicitons2.png" alt="Predictions Overview" width="800"/>
-  <p><em>Alternative view of match predictions and upcoming games</em></p>
+  <img src="docs/screenshots/profile.png" alt="User Profile" width="800"/>
+  <p><em>User profile management and account settings</em></p>
 </div>
+
+### ⚽ Manage Matches
+<div align="center">
+  <img src="docs/screenshots/manage.png" alt="Admin Match Management" width="800"/>
+  <p><em>Admin interface for managing matches and updating results</em></p>
+</div>
+
 
 ## ✨ Features
 

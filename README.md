@@ -17,6 +17,7 @@
 ## 📋 Table of Contents
 
 - [🎯 Overview](#-overview)
+- [📸 Screenshots](#-screenshots)
 - [✨ Features](#-features)
 - [🏗️ Architecture](#️-architecture)
 - [🚀 Quick Start](#-quick-start)
@@ -42,6 +43,50 @@ Espo City League is a comprehensive football prediction platform where users can
 - **Admin Dashboard**: Manage matches and update results
 - **Responsive Design**: Works seamlessly on desktop and mobile
 - **Collapsible Sidebar**: Space-efficient navigation
+
+## 📸 Screenshots
+
+### 🎮 Match Predictions
+<div align="center">
+  <img src="docs/screenshots/predicitons1.png" alt="Match Predictions Interface" width="800"/>
+  <p><em>Making predictions on upcoming matches with intuitive interface</em></p>
+</div>
+
+### 👥 Community Predictions
+<div align="center">
+  <img src="docs/screenshots/community-predicitons.png" alt="Community Predictions" width="800"/>
+  <p><em>Viewing other players' predictions and community engagement</em></p>
+</div>
+
+### 🏆 Leaderboard
+<div align="center">
+  <img src="docs/screenshots/leaderboard.png" alt="Leaderboard" width="800"/>
+  <p><em>Real-time leaderboard with scoring and rankings</em></p>
+</div>
+
+### 👨‍💼 Admin Dashboard
+<div align="center">
+  <img src="docs/screenshots/manage.png" alt="Admin Match Management" width="800"/>
+  <p><em>Admin interface for managing matches and updating results</em></p>
+</div>
+
+### 👤 User Profile
+<div align="center">
+  <img src="docs/screenshots/profile.png" alt="User Profile" width="800"/>
+  <p><em>User profile management and account settings</em></p>
+</div>
+
+### 📋 Game Rules
+<div align="center">
+  <img src="docs/screenshots/rules.png" alt="Game Rules" width="800"/>
+  <p><em>Clear explanation of scoring system and game rules</em></p>
+</div>
+
+### 🎯 Additional Predictions View
+<div align="center">
+  <img src="docs/screenshots/predicitons2.png" alt="Predictions Overview" width="800"/>
+  <p><em>Alternative view of match predictions and upcoming games</em></p>
+</div>
 
 ## ✨ Features
 
@@ -175,7 +220,11 @@ espo-city-league/
 │   │   ├── 📁 services/     # API services
 │   │   └── 📁 utils/        # Utilities
 │   └── 📄 package.json      # Node deps
-├── 📁 docs/                  # Documentation
+├── 📁 docs/                  # Documentation & Screenshots
+│   ├── 📁 screenshots/      # Application screenshots
+│   ├── 📄 README.md         # Screenshot documentation
+│   ├── 📄 screenshot-preview.html # Preview template
+│   └── 📄 create-placeholders.py  # Placeholder generator
 └── 📄 README.md             # This file
 ```
 
@@ -270,6 +319,20 @@ The platform uses a color-coded scoring system:
 - **Actual**: Chelsea 1-0 Arsenal → **0 points** (RED - wrong result)
 
 ## 🛠️ Development
+
+### 📸 Screenshots
+
+The application screenshots are already included in the README, showcasing:
+
+- **Match Predictions**: Interface for making predictions
+- **Community Predictions**: Viewing other players' bets
+- **Leaderboard**: Real-time rankings and scores
+- **Admin Dashboard**: Match management interface
+- **User Profile**: Account settings and management
+- **Game Rules**: Scoring system explanation
+- **Multiple Prediction Views**: Different interfaces for predictions
+
+Screenshots are located in `docs/screenshots/` and automatically displayed in this README.
 
 ### Backend Development
 ```bash

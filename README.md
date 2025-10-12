@@ -152,7 +152,7 @@ npm start
 
 ### 4. Access the Application
 - **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
+- **Backend API**: http://localhost:8000/api
 - **API Docs**: http://localhost:8000/docs
 
 ## 📁 Project Structure
@@ -182,24 +182,39 @@ espo-city-league/
 ## 🔧 API Documentation
 
 ### Authentication Endpoints
-- `POST /auth/login` - User login
-- `POST /auth/register` - User registration
-- `POST /auth/logout` - User logout
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user profile
+- `PUT /api/auth/me` - Update current user profile
 
 ### Match Endpoints
-- `GET /matches/` - List all matches
-- `GET /matches/{id}` - Get match details
-- `PATCH /matches/{id}/scores` - Update match scores (admin)
+- `GET /api/matches/` - List all matches
+- `GET /api/matches/{id}` - Get match details
+- `PATCH /api/matches/{id}/scores` - Update match scores (admin)
+- `POST /api/matches/` - Create new match (admin)
+- `PUT /api/matches/{id}` - Update match (admin)
 
 ### Prediction Endpoints
-- `POST /bets/` - Create new prediction
-- `PATCH /bets/{id}` - Update existing prediction
-- `GET /bets/user/{user_id}` - Get user predictions
+- `POST /api/bets/` - Create new prediction
+- `PATCH /api/bets/{id}` - Update existing prediction
+- `GET /api/bets/user/{user_id}` - Get user predictions
+- `GET /api/bets/` - List all bets
 
 ### Stage Endpoints
-- `GET /stages/` - List all stages
-- `GET /stages/{id}/matches` - Get stage matches
-- `GET /stages/{id}/bets` - Get stage predictions
+- `GET /api/stages/` - List all stages
+- `GET /api/stages/{id}/matches` - Get stage matches
+- `GET /api/stages/{id}/bets` - Get stage predictions
+- `POST /api/stages/` - Create new stage (admin)
+
+### Team Endpoints
+- `GET /api/teams/` - List all teams
+- `GET /api/teams/{id}` - Get team details
+- `POST /api/teams/` - Create new team (admin)
+
+### Leaderboard Endpoints
+- `GET /api/leaderboard/` - Get user rankings
+
+### Health Endpoint
+- `GET /api/health` - API health check
 
 ## 🎮 Usage Guide
 

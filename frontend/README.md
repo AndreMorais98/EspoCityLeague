@@ -100,7 +100,7 @@ yarn install
 cp .env.example .env.local
 
 # Edit .env.local with your API URL
-BACKEND_URL=BACKEND_URL
+REACT_APP_API_URL=http://localhost:8000/api
 ```
 
 ### 3. Start Development Server
@@ -288,7 +288,7 @@ const { isCollapsed, toggleSidebar } = useSidebar();
 ```typescript
 // services/api.ts
 class ApiService {
-  private baseURL: string;
+  private baseURL: string = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
   private token: string | null = null;
 
   async login(username: string, password: string): Promise<LoginResponse> {
@@ -304,6 +304,12 @@ class ApiService {
   async getStages(): Promise<Stage[]> {
     return this.makeRequest<Stage[]>('/stages/');
   }
+
+  // All API calls are automatically prefixed with /api
+  // Examples:
+  // - /auth/login becomes /api/auth/login
+  // - /stages/ becomes /api/stages/
+  // - /matches/ becomes /api/matches/
 }
 ```
 
@@ -455,10 +461,12 @@ npm test
 ### Environment Variables
 ```bash
 # .env.local
-REACT_APP_API_URL=http://localhost:8000
+REACT_APP_API_URL=http://localhost:8000/api
 REACT_APP_APP_NAME=Espo City League
 REACT_APP_VERSION=1.0.0
 ```
+
+**Note**: The API URL should include the `/api` prefix as all backend endpoints are now prefixed with `/api`.
 
 ## 🛠️ Development
 

@@ -116,7 +116,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### 5. Access the API
-- **API**: http://localhost:8000
+- **API Base**: http://localhost:8000/api
 - **Interactive Docs**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
@@ -145,49 +145,55 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ### 🔐 Authentication
 ```http
-POST /auth/login          # User login
-POST /auth/register       # User registration
-POST /auth/logout         # User logout
-```
-
-### 👥 Users
-```http
-GET  /users/me            # Get current user profile
-PUT  /users/me            # Update current user profile
-GET  /users/              # List all users (admin only)
+POST /api/auth/login      # User login
+GET  /api/auth/me         # Get current user profile
+PUT  /api/auth/me         # Update current user profile
 ```
 
 ### ⚽ Matches
 ```http
-GET   /matches/           # List all matches
-GET   /matches/{id}       # Get match details
-POST  /matches/           # Create new match (admin)
-PUT   /matches/{id}       # Update match (admin)
-PATCH /matches/{id}/scores # Update match scores (admin)
+GET   /api/matches/           # List all matches
+GET   /api/matches/{id}       # Get match details
+POST  /api/matches/           # Create new match (admin)
+PUT   /api/matches/{id}       # Update match (admin)
+PATCH /api/matches/{id}/scores # Update match scores (admin)
 ```
 
 ### 🎯 Predictions (Bets)
 ```http
-GET    /bets/             # List user's predictions
-POST   /bets/             # Create new prediction
-GET    /bets/{id}         # Get prediction details
-PATCH  /bets/{id}         # Update existing prediction
-DELETE /bets/{id}         # Delete prediction
+GET    /api/bets/             # List all bets
+POST   /api/bets/             # Create new prediction
+GET    /api/bets/{id}         # Get prediction details
+PATCH  /api/bets/{id}         # Update existing prediction
+GET    /api/bets/user/{user_id} # Get user predictions
 ```
 
 ### 🏆 Stages
 ```http
-GET /stages/              # List all stages
-GET /stages/{id}          # Get stage details
-GET /stages/{id}/matches  # Get stage matches
-GET /stages/{id}/bets     # Get stage predictions
+GET  /api/stages/              # List all stages
+POST /api/stages/              # Create new stage (admin)
+GET  /api/stages/{id}          # Get stage details
+PUT  /api/stages/{id}          # Update stage (admin)
+DEL  /api/stages/{id}          # Delete stage (admin)
+GET  /api/stages/{id}/matches  # Get stage matches
+GET  /api/stages/{id}/bets     # Get stage predictions
 ```
 
 ### 🏟️ Teams
 ```http
-GET  /teams/              # List all teams
-GET  /teams/{id}          # Get team details
-POST /teams/              # Create new team (admin)
+GET  /api/teams/              # List all teams
+GET  /api/teams/{id}          # Get team details
+POST /api/teams/              # Create new team (admin)
+```
+
+### 🏅 Leaderboard
+```http
+GET /api/leaderboard/         # Get user rankings
+```
+
+### ❤️ Health
+```http
+GET /api/health               # API health check
 ```
 
 ## 🗄️ Database Models
@@ -403,6 +409,11 @@ uvicorn app.main:app --reload --log-level debug
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 - **OpenAPI JSON**: http://localhost:8000/openapi.json
+
+**Note**: All API endpoints are prefixed with `/api`. For example:
+- Login: `POST /api/auth/login`
+- Get matches: `GET /api/matches/`
+- Health check: `GET /api/health`
 
 ## 🔧 Configuration
 

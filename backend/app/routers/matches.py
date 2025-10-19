@@ -4,10 +4,48 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlmodel import Session, select
 from app.db import get_session
 from app.models.match import Match, MatchCreate, MatchUpdate, MatchResponse
-from app.dependencies import get_current_user
+from app.models.bet import Bet
 from app.models.user import User
+from app.dependencies import get_current_user
 
 router = APIRouter(prefix="/matches", tags=["matches"])
+
+
+def calculate_bet_points(home_prediction: int, away_prediction: int, home_actual: int, away_actual: int) -> int:
+    """
+    Calculate points awarded for a bet based on the prediction vs actual result.
+    
+    Scoring system:
+    - Exact score match: 3 points
+    - Correct result (win/draw/loss): 1 point
+    - Wrong result: 0 points
+    """
+    # Exact score match
+    if home_prediction == home_actual and away_prediction == away_actual:
+        return 3
+    
+    # Determine predicted result
+    if home_prediction > away_prediction:
+        predicted_result = "home_win"
+    elif home_prediction < away_prediction:
+        predicted_result = "away_win"
+    else:
+        predicted_result = "draw"
+    
+    # Determine actual result
+    if home_actual > away_actual:
+        actual_result = "home_win"
+    elif home_actual < away_actual:
+        actual_result = "away_win"
+    else:
+        actual_result = "draw"
+    
+    # Correct result (but not exact score)
+    if predicted_result == actual_result:
+        return 1
+    
+    # Wrong result
+    return 0
 
 
 @router.post("/", response_model=MatchResponse)
@@ -44,7 +82,7 @@ def update_match_scores(
     session: Session = Depends(get_session),
     current_user: User = Depends(get_current_user)
 ) -> MatchResponse:
-    """Update match scores (admin only)"""
+    """Update match scores and process bet calculations (admin only)"""
     if not current_user.is_superuser:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -80,10 +118,47 @@ def update_match_scores(
             detail="Scores must be non-negative"
         )
     
-    # Update scores
+    # Check if this is the first time scores are being set
+    is_first_time_scoring = match.home_score is None and match.away_score is None
+    
+    # Update match scores
     match.home_score = home_score
     match.away_score = away_score
     match.updated_at = datetime.now()
+    
+    # Process bets only if this is the first time scores are being set
+    if is_first_time_scoring:
+        # Get all bets for this match
+        bets_stmt = select(Bet).where(Bet.match_id == match_id)
+        bets = session.exec(bets_stmt).all()
+        
+        # Track user score updates
+        user_score_updates = {}
+        
+        for bet in bets:
+            # Calculate points for this bet
+            points_awarded = calculate_bet_points(
+                bet.home_score_prediction,
+                bet.away_score_prediction,
+                home_score,
+                away_score
+            )
+            
+            # Update bet points
+            bet.points_awarded = points_awarded
+            bet.updated_at = datetime.now()
+            
+            # Track user score update
+            if bet.user_id not in user_score_updates:
+                user_score_updates[bet.user_id] = 0
+            user_score_updates[bet.user_id] += points_awarded
+        
+        # Update user scores
+        for user_id, points_to_add in user_score_updates.items():
+            user = session.get(User, user_id)
+            if user:
+                user.score += points_to_add
+                user.updated_at = datetime.now()
     
     session.add(match)
     session.commit()

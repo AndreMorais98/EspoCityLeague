@@ -1,4 +1,5 @@
 const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
+/* const API_BASE_URL = process.env.BACKEND_URL || 'http://localhost:8000/api'; */
 
 interface LoginCredentials {
   username: string;

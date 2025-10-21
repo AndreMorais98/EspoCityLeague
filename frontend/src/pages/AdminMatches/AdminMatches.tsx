@@ -48,7 +48,7 @@ export default function AdminMatches() {
       setStages(stagesData);
       
       if (stagesData.length > 0) {
-        // Analyze all stages in one go (lightweight - no API calls)
+        // Analyze all stages to determine which are upcoming and which are past (lightweight)
         const { upcomingStageId: nextUpcomingStageId, pastStageIds } = analyzeStagesByDate(stagesData);
         
         setUpcomingStageId(nextUpcomingStageId);

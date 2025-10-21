@@ -1,6 +1,7 @@
 import { getAuthToken, User } from './auth';
 
 const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
+/* const API_BASE_URL = process.env.BACKEND_URL || 'http://localhost:8000/api';*/
 
 interface ApiResponse<T> {
   data: T;
@@ -8,6 +9,9 @@ interface ApiResponse<T> {
 }
 
 class ApiService {
+  private cache = new Map<string, { data: any; timestamp: number }>();
+  private readonly CACHE_DURATION = 60*60*1000; // 5 seconds
+
   private async makeRequest<T>(
     endpoint: string,
     options: RequestInit = {}
@@ -38,13 +42,12 @@ class ApiService {
     return response.json();
   }
 
-  // Auth endpoints
   async getCurrentUser(): Promise<User> {
-    return this.makeRequest<User>('/auth/me/');
+    return this.makeRequest<User>('/auth/me');
   }
 
   async updateCurrentUser(updateData: { username?: string; phone?: string; password?: string }): Promise<User> {
-    return this.makeRequest<User>('/auth/me/', {
+    return this.makeRequest<User>('/auth/me', {
       method: 'PUT',
       body: JSON.stringify(updateData),
     });
@@ -52,31 +55,40 @@ class ApiService {
 
   // Leaderboard endpoints
   async getLeaderboard(): Promise<User[]> {
-    return this.makeRequest<User[]>('/leaderboard/');
+    const cacheKey = 'leaderboard';
+    const cached = this.cache.get(cacheKey);
+    
+    if (cached && Date.now() - cached.timestamp < this.CACHE_DURATION) {
+      return cached.data;
+    }
+    
+    const data = await this.makeRequest<User[]>('/leaderboard');
+    this.cache.set(cacheKey, { data, timestamp: Date.now() });
+    return data;
   }
 
   // Bets endpoints
   async getBets(): Promise<any[]> {
-    return this.makeRequest<any[]>('/bets/');
+    return this.makeRequest<any[]>('/bets');
   }
 
   async getBetById(id: number): Promise<any> {
-    return this.makeRequest<any>(`/bets/${id}/`);
+    return this.makeRequest<any>(`/bets/${id}`);
   }
 
   async getUserBets(userId: number): Promise<any[]> {
-    return this.makeRequest<any[]>(`/bets/user/${userId}/`);
+    return this.makeRequest<any[]>(`/bets/user/${userId}`);
   }
 
   async createBet(betData: { user_id: number; match_id: number; home_score_prediction: number; away_score_prediction: number }): Promise<any> {
-    return this.makeRequest<any>('/bets/', {
+    return this.makeRequest<any>('/bets', {
       method: 'POST',
       body: JSON.stringify(betData),
     });
   }
 
   async updateBet(betId: number, betData: { home_score_prediction: number; away_score_prediction: number }): Promise<any> {
-    return this.makeRequest<any>(`/bets/${betId}/`, {
+    return this.makeRequest<any>(`/bets/${betId}`, {
       method: 'PATCH',
       body: JSON.stringify(betData),
     });
@@ -84,46 +96,55 @@ class ApiService {
 
   // Teams endpoints
   async getTeams(): Promise<any[]> {
-    return this.makeRequest<any[]>('/teams/');
+    return this.makeRequest<any[]>('/teams');
   }
 
   async getTeamById(id: number): Promise<any> {
-    return this.makeRequest<any>(`/teams/${id}/`);
+    return this.makeRequest<any>(`/teams/${id}`);
   }
 
   // Matches endpoints
   async getMatches(): Promise<any[]> {
-    return this.makeRequest<any[]>('/matches/');
+    return this.makeRequest<any[]>('/matches');
   }
 
   async getMatchesByDate(date: string): Promise<any[]> {
-    return this.makeRequest<any[]>(`/matches/?date=${date}`);
+    return this.makeRequest<any[]>(`/matches?date=${date}`);
   }
 
   async getMatchById(id: number): Promise<any> {
-    return this.makeRequest<any>(`/matches/${id}/`);
+    return this.makeRequest<any>(`/matches/${id}`);
   }
 
   // Stages endpoints
   async getStages(): Promise<any[]> {
-    return this.makeRequest<any[]>('/stages/');
+    const cacheKey = 'stages';
+    const cached = this.cache.get(cacheKey);
+    
+    if (cached && Date.now() - cached.timestamp < this.CACHE_DURATION) {
+      return cached.data;
+    }
+    
+    const data = await this.makeRequest<any[]>('/stages');
+    this.cache.set(cacheKey, { data, timestamp: Date.now() });
+    return data;
   }
 
   async getStageById(id: number): Promise<any> {
-    return this.makeRequest<any>(`/stages/${id}/`);
+    return this.makeRequest<any>(`/stages/${id}`);
   }
 
   async getStageMatches(stageId: number): Promise<any[]> {
-    return this.makeRequest<any[]>(`/stages/${stageId}/matches/`);
+    return this.makeRequest<any[]>(`/stages/${stageId}/matches`);
   }
 
   async getStageBets(stageId: number): Promise<any[]> {
-    return this.makeRequest<any[]>(`/stages/${stageId}/bets/`);
+    return this.makeRequest<any[]>(`/stages/${stageId}/bets`);
   }
 
   // Admin endpoints
   async updateMatchScores(matchId: number, scores: { home_score: number; away_score: number }): Promise<any> {
-    return this.makeRequest<any>(`/matches/${matchId}/scores/`, {
+    return this.makeRequest<any>(`/matches/${matchId}/scores`, {
       method: 'PATCH',
       body: JSON.stringify(scores),
     });

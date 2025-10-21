@@ -7,6 +7,7 @@ from app.dependencies import get_current_user
 router = APIRouter(prefix="/leaderboard", tags=["leaderboard"])
 
 
+@router.get("")
 @router.get("/", response_model=list[User])
 def get_leaderboard(
     session: Session = Depends(get_session),

@@ -25,6 +25,7 @@ def create_stage(
     return stage
 
 
+@router.get("", response_model=List[StageResponse])
 @router.get("/", response_model=List[StageResponse])
 def get_stages(
     session: Session = Depends(get_session),
@@ -107,6 +108,7 @@ def delete_stage(
 
 
 @router.get("/{stage_id}/matches")
+@router.get("/{stage_id}/matches/")
 def get_stage_matches(
     stage_id: int,
     session: Session = Depends(get_session),
@@ -171,6 +173,7 @@ def get_stage_matches(
 
 
 @router.get("/{stage_id}/bets")
+@router.get("/{stage_id}/bets/")
 def get_stage_bets(
     stage_id: int,
     session: Session = Depends(get_session),

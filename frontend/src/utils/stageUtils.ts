@@ -35,6 +35,7 @@ export interface StageAnalysis {
 /**
  * Analyzes stages based on their dates to determine which are likely upcoming/past
  * This is a lightweight approach that doesn't require loading all matches
+ * Uses a 3-day buffer to account for matches that might extend beyond stage date
  * @param stages Array of stages to analyze
  * @returns Object containing upcoming stage ID and set of past stage IDs
  */
@@ -50,9 +51,11 @@ export const analyzeStagesByDate = (stages: Stage[]): StageAnalysis => {
   
   for (const stage of sortedStages) {
     const stageDate = new Date(stage.date);
+    // Add 3 days buffer to account for matches that might extend beyond stage date
+    const stageEndDate = new Date(stageDate.getTime() + 3 * 24 * 60 * 60 * 1000);
     
-    // If stage date is in the past, consider it a past stage
-    if (stageDate < now) {
+    // If stage end date (with buffer) is in the past, consider it a past stage
+    if (stageEndDate < now) {
       pastStageIds.add(stage.id);
     } else {
       // If stage date is in the future and we haven't found an upcoming stage yet

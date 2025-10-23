@@ -16,7 +16,7 @@
 
   &__header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 32px;
   }
@@ -361,7 +361,9 @@
   }
 }
 
-// Responsive design
+// ===== RESPONSIVE DESIGN =====
+
+// Tablet and Mobile (≤ 768px)
 @media (max-width: 768px) {
   .leaderboard {
     padding: 16px;
@@ -373,11 +375,11 @@
     }
 
     &__title {
-      font-size: 24px;
+      font-size: 28px;
     }
 
     &__podium {
-      flex-direction: column;
+      justify-content: normal;
       align-items: center;
       gap: 16px;
       height: auto;
@@ -387,18 +389,15 @@
       &.first,
       &.second,
       &.third {
-        height: 280px;
         align-self: center;
         margin-top: 0;
-        width: 100%;
-        max-width: 300px;
-        min-width: 250px;
+        width: 150px;
       }
     }
 
     .table__header,
     .table__row {
-      grid-template-columns: 60px 1fr 80px 80px 80px;
+      grid-template-columns: 60px 1fr 80px;
       gap: 12px;
       font-size: 14px;
     }
@@ -411,6 +410,46 @@
       
       .user__handle {
         font-size: 12px;
+      }
+    }
+  }
+}
+
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .leaderboard {
+    padding: 12px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    .podium__card {
+      &.first,
+      &.second,
+      &.third {
+        min-width: 20px;
+        width: 100px;
+        padding: 24px 0;
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .podium__card {
+      &.second,
+      &.third {
+        height: 200px;
+      }
+    }
+
+    .podium__card {
+      &.first {
+        height: 250px;
       }
     }
   }

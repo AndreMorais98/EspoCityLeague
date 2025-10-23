@@ -78,6 +78,13 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
+
+  .match-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+  }  
 }
 
 .team {
@@ -116,13 +123,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.match-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 80px;
 }
 
 .score-display {
@@ -354,5 +354,47 @@
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+}
+
+// ===== RESPONSIVE DESIGN =====
+
+// Tablet and Mobile (≤ 768px)
+@media (max-width: 768px) {
+  .match-card {
+    padding: 16px;
+  }
+
+  .match-content {
+    .match-info {
+      align-items: center;
+    }
+  }
+}
+
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .match-card {
+    padding: 12px;
+  }
+
+  .match-content {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .team-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .score-inputs {
+    gap: 8px;
+  }
+
+  .score-input {
+    width: 50px;
+    height: 40px;
+    font-size: 18px;
   }
 }

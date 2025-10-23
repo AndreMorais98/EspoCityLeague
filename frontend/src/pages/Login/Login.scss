@@ -80,10 +80,6 @@
   gap: 60px;
   max-width: 500px;
   width: 100%;
-  
-  @media (max-width: 768px) {
-    gap: 40px;
-  }
 }
 
 .login-hero {
@@ -149,10 +145,6 @@
     animation: shimmer 3s ease-in-out infinite;
     background-size: 200% 200%;
   }
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
 }
 
 @keyframes shimmer {
@@ -177,10 +169,6 @@
   width: 100%;
   max-width: 440px;
   animation: fadeInUp 0.6s ease-out;
-  
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
 }
 
 @keyframes fadeInUp {
@@ -405,5 +393,40 @@ svg defs {
     stop:last-child {
       stop-color: #0099ff;
     }
+  }
+}
+
+// ===== RESPONSIVE DESIGN =====
+
+// Tablet and Mobile (≤ 768px)
+@media (max-width: 768px) {
+  .login-content {
+    gap: 40px;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}
+
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .login-content {
+    gap: 32px;
+    padding: 0 16px;
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+  }
+
+  .login-card {
+    max-width: 100%;
   }
 }

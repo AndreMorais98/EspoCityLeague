@@ -8,7 +8,7 @@ import './Sidebar.scss';
 export default function Sidebar() {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
-  const { isCollapsed, toggleSidebar } = useSidebar();
+  const { isCollapsed, toggleSidebar, isMobileOpen } = useSidebar();
 
   const handleLogout = async () => {
     try {
@@ -21,7 +21,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
       <button 
         className="sidebar__toggle"
         onClick={toggleSidebar}

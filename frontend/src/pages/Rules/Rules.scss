@@ -251,8 +251,9 @@
   }
 }
 
+// ===== RESPONSIVE DESIGN =====
 
-// Responsive Design
+// Tablet and Mobile (≤ 768px)
 @media (max-width: 768px) {
   .rules {
     padding: 16px;
@@ -262,7 +263,7 @@
       margin-bottom: 32px;
 
       h1 {
-        font-size: 32px;
+        font-size: 36px;
       }
 
       .rules__subtitle {
@@ -302,9 +303,21 @@
     }
   }
 
-
   .card__header {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .rules {
+    padding: 12px;
+
+    &__header {
+      h1 {
+        font-size: 28px;
+      }
+    }
   }
 }

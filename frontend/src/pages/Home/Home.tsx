@@ -5,11 +5,22 @@ import { useSidebar } from '../../contexts/SidebarContext';
 import './Home.scss';
 
 export default function Home() {
-  const { isCollapsed } = useSidebar();
+  const { isCollapsed, isMobileOpen, toggleMobileSidebar } = useSidebar();
   
   return (
     <div className="layout">
       <Sidebar />
+      <button 
+        className="mobile-menu-toggle"
+        onClick={toggleMobileSidebar}
+        title="Toggle menu"
+      >
+        ☰
+      </button>
+      <div 
+        className={`mobile-overlay ${isMobileOpen ? 'active' : ''}`}
+        onClick={toggleMobileSidebar}
+      />
       <main className={`content ${isCollapsed ? 'sidebar-collapsed' : ''}`}>
         <Outlet />
       </main>

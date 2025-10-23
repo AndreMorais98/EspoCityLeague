@@ -324,13 +324,17 @@
   }
 }
 
+// ===== RESPONSIVE DESIGN =====
+
+// Tablet and Mobile (≤ 768px)
 @media (max-width: 768px) {
   .others-bets-container {
+    max-width: calc(100vw - 32px);
     padding: 16px;
   }
 
   .page-title {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .match-header {
@@ -343,7 +347,18 @@
   }
 
   .bets-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .others-bets-container {
+    max-width: calc(100vw - 24px);
+    padding: 12px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+}

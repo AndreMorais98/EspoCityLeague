@@ -14,8 +14,10 @@
     h1 {
       font-size: 32px;
       font-weight: 700;
-      color: #1e293b;
-      margin: 0;
+      background: linear-gradient(135deg, #2196F3, #1976D2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 
@@ -24,11 +26,6 @@
     grid-template-columns: 1fr 2fr;
     gap: 48px;
     align-items: start;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
   }
 }
 
@@ -198,5 +195,38 @@
     background: #fef2f2;
     color: #dc2626;
     border: 1px solid #fecaca;
+  }
+}
+
+// ===== RESPONSIVE DESIGN =====
+
+// Tablet and Mobile (≤ 768px)
+@media (max-width: 768px) {
+  .user-details {
+    padding: 16px;
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    &__header {
+      h1 {
+        font-size: 28px;
+      }
+    }
+  }
+}
+
+// Mobile (≤ 480px)
+@media (max-width: 480px) {
+  .user-details {
+    padding: 12px;
+
+    &__header {
+      h1 {
+        font-size: 24px;
+      }
+    }
   }
 }

@@ -5,7 +5,7 @@ import jwt
 
 JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALG = "HS256"
-JWT_EXPIRE_SECONDS = 3600
+JWT_EXPIRE_SECONDS = 3600 * 2 * 24 * 7
 
 
 def hash_password(plain: str) -> str:

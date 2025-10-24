@@ -10,11 +10,8 @@
     background: #f8fafc; 
     color: #1e293b;
     min-height: 100vh;
-    transition: margin-left 0.3s ease;
-    
-    &.sidebar-collapsed {
-        margin-left: 80px;
-    }
+    position: relative;
+    z-index: 1;
 }
 
 // ===== RESPONSIVE DESIGN =====

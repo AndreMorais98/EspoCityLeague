@@ -69,6 +69,13 @@ export async function getCurrentUser(): Promise<User> {
   });
 
   if (!response.ok) {
+    // Handle 401 Unauthorized - token expired or invalid
+    if (response.status === 401) {
+      // Clear the token and redirect to login
+      await logout();
+      window.location.href = '/login';
+      throw new Error('Authentication failed. Please login again.');
+    }
     throw new Error('Failed to fetch user info');
   }
 

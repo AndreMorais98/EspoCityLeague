@@ -1,7 +1,7 @@
-import { getAuthToken, User } from './auth';
+import { getAuthToken, logout, User } from './auth';
 
 const API_BASE_URL = process.env.BACKEND_URL || 'https://espocity-league.mooo.com/api';
-/* const API_BASE_URL = process.env.BACKEND_URL || 'http://localhost:8000/api';*/
+/* const API_BASE_URL = process.env.BACKEND_URL || 'http://localhost:8000/api'; */
 
 interface ApiResponse<T> {
   data: T;
@@ -36,6 +36,13 @@ class ApiService {
     });
 
     if (!response.ok) {
+      // Handle 401 Unauthorized - token expired or invalid
+      if (response.status === 401) {
+        // Clear the token and redirect to login
+        await logout();
+        window.location.href = '/login';
+        throw new Error('Authentication failed. Please login again.');
+      }
       throw new Error(`API request failed: ${response.status} ${response.statusText}`);
     }
 

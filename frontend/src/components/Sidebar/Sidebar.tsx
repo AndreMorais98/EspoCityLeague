@@ -34,6 +34,13 @@ export default function Sidebar() {
     }
   };
 
+  // Close mobile sidebar when a navigation link is clicked
+  const handleNavClick = () => {
+    if (isMobileOpen) {
+      toggleMobileSidebar();
+    }
+  };
+
   return (
     <aside className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
       
@@ -46,6 +53,7 @@ export default function Sidebar() {
         <NavLink
           to="/leaderboard"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+          onClick={handleNavClick}
         >
           <div className="item__icon">🏆</div>
           <span className="item__text">Rankings</span>
@@ -53,6 +61,7 @@ export default function Sidebar() {
         <NavLink
           to="/games"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+          onClick={handleNavClick}
         >
           <div className="item__icon">⚽</div>
           <span className="item__text">My Predictions</span>
@@ -60,6 +69,7 @@ export default function Sidebar() {
         <NavLink
           to="/others-bets"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+          onClick={handleNavClick}
         >
           <div className="item__icon">👥</div>
           <span className="item__text">Community Predictions</span>
@@ -67,6 +77,7 @@ export default function Sidebar() {
         <NavLink
           to="/rules"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+          onClick={handleNavClick}
         >
           <div className="item__icon">📋</div>
           <span className="item__text">Game Rules</span>
@@ -74,6 +85,7 @@ export default function Sidebar() {
         <NavLink
           to="/profile"
           className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+          onClick={handleNavClick}
         >
           <div className="item__icon">⚙️</div>
           <span className="item__text">My Profile</span>
@@ -82,6 +94,7 @@ export default function Sidebar() {
           <NavLink
             to="/admin-matches"
             className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+            onClick={handleNavClick}
           >
             <div className="item__icon">⚽</div>
             <span className="item__text">Manage Matches</span>
@@ -91,6 +104,7 @@ export default function Sidebar() {
           <NavLink
             to="/create-match"
             className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+            onClick={handleNavClick}
           >
             <div className="item__icon">➕</div>
             <span className="item__text">Create Match</span>

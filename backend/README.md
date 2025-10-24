@@ -36,6 +36,7 @@ The Espo City League backend is a modern REST API built with FastAPI that powers
 - **PostgreSQL Database**: Robust relational database with migrations
 - **Admin Panel Support**: Role-based access control for administrators
 - **Real-time Scoring**: Automatic point calculation for predictions
+- **Tie-Breaking System**: Advanced leaderboard ranking with multiple criteria
 - **Comprehensive Testing**: Unit and integration tests with pytest
 
 ## 🏗️ Architecture
@@ -55,7 +56,10 @@ backend/
 │   │   ├── teams.py     # Team endpoints
 │   │   ├── stages.py    # Stage endpoints
 │   │   ├── matches.py   # Match endpoints
-│   │   └── bets.py      # Prediction endpoints
+│   │   ├── bets.py      # Prediction endpoints
+│   │   └── leaderboard.py # Leaderboard and tie-breaking endpoints
+│   ├── services/        # Business logic services
+│   │   └── tie_breaking.py # Tie-breaking statistics calculation
 │   ├── dependencies/    # Dependency injection
 │   │   ├── auth.py      # Authentication dependencies
 │   │   └── database.py  # Database session management
@@ -122,6 +126,10 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 - **`stages.py`**: Stage and matchday endpoints
 - **`matches.py`**: Match management and results
 - **`bets.py`**: Prediction creation and management
+- **`leaderboard.py`**: User rankings and tie-breaking statistics
+
+### Services (`app/services/`)
+- **`tie_breaking.py`**: Advanced tie-breaking logic and statistics calculation
 
 ### Dependencies (`app/dependencies/`)
 - **`auth.py`**: JWT token validation and user authentication
@@ -174,7 +182,8 @@ POST /api/teams/              # Create new team (admin)
 
 ### 🏅 Leaderboard
 ```http
-GET /api/leaderboard/         # Get user rankings
+GET  /api/leaderboard/         # Get user rankings with tie-breaking
+POST /api/leaderboard/update-stats # Update tie-breaking statistics (admin)
 ```
 
 ### ❤️ Health
@@ -189,9 +198,14 @@ GET /api/health               # API health check
 class User(SQLModel, table=True):
     id: int = Field(primary_key=True)
     username: str = Field(unique=True, index=True)
-    email: str = Field(unique=True, index=True)
+    phone: str = Field(unique=True, index=True)
     hashed_password: str
+    is_active: bool = Field(default=True)
     is_superuser: bool = Field(default=False)
+    score: int = Field(default=0)
+    correct_results: int = Field(default=0)      # Exact score predictions
+    lone_wolf_victories: int = Field(default=0)  # Unique correct predictions
+    defeats: int = Field(default=0)              # Games with 0 points
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 ```
@@ -238,6 +252,29 @@ class Bet(SQLModel, table=True):
 3. JWT token generated and returned
 4. Client includes token in Authorization header
 5. Server validates token on each request
+
+## 🏆 Tie-Breaking System
+
+### Ranking Criteria
+The leaderboard uses a sophisticated tie-breaking system when users have the same score:
+
+1. **Correct Results** (Exact Score Predictions)
+   - Counts predictions where both home and away scores match exactly
+   - Higher count ranks higher
+
+2. **Lone Wolf Victories** (Unique Correct Predictions)
+   - Counts correct predictions where only that user got it right
+   - Rewards bold, unique predictions
+   - Higher count ranks higher
+
+3. **Defeats** (Zero-Point Games)
+   - Counts games where the user got 0 points (completely wrong result)
+   - Lower count ranks higher (fewer defeats is better)
+
+### Automatic Updates
+- Tie-breaking statistics are automatically updated when match results are processed
+- Admins can manually trigger updates via `/api/leaderboard/update-stats`
+- Statistics are recalculated when match scores are edited
 
 ## 📦 Deployment
 

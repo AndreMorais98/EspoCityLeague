@@ -243,8 +243,9 @@
 }
 
 .table__header {
+  align-items: center;
   display: grid;
-  grid-template-columns: 80px 2fr 120px 120px 120px;
+  grid-template-columns: 80px 2fr 120px 120px;
   gap: 20px;
   padding: 16px 0;
   border-bottom: 1px solid #e2e8f0;
@@ -258,7 +259,7 @@
 
 .table__row {
   display: grid;
-  grid-template-columns: 80px 2fr 120px 120px 120px;
+  grid-template-columns: 80px 2fr 120px 120px;
   gap: 20px;
   padding: 16px 0;
   border-bottom: 1px solid #f1f5f9;
@@ -397,7 +398,7 @@
 
     .table__header,
     .table__row {
-      grid-template-columns: 60px 1fr 80px;
+      grid-template-columns: 60px 1fr 80px 100px;
       gap: 12px;
       font-size: 14px;
     }
@@ -429,8 +430,8 @@
       &.second,
       &.third {
         min-width: 20px;
-        width: 100px;
-        padding: 24px 0;
+        width: 150px;
+        padding: 24px 10px;
 
         .avatar {
           width: 40px;
@@ -443,14 +444,112 @@
     .podium__card {
       &.second,
       &.third {
-        height: 200px;
+        height: 250px;
       }
     }
 
     .podium__card {
       &.first {
-        height: 250px;
+        height: 300px;
       }
+    }
+  }
+}
+
+// Tie-breaking stats styles
+.tie-break__stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    
+    &:first-child {
+      color: #10b981; // Green for correct results
+    }
+    
+    &:nth-child(2) {
+      color: #f59e0b; // Orange for lone wolf victories
+    }
+    
+    &:last-child {
+      color: #ef4444; // Red for defeats
+    }
+  }
+}
+
+// Podium tie-break stats
+.podium__card .tie-break__stats {
+  .stat {
+    font-size: 11px;
+    padding: 3px 6px;
+    
+    &:nth-child(1) {
+      color: #ffffff;
+      background: rgba(50, 245, 11, 0.3);
+      border: 1px solid rgba(105, 245, 11, 0.5);
+    }
+
+    &:nth-child(2) {
+      color: #ffffff;
+      background: rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(116, 79, 15, 0.5);
+    }
+
+    &:nth-child(3) {
+      color: #ffffff;
+      background: rgba(245, 11, 11, 0.3);
+      border: 1px solid rgba(245, 11, 11, 0.5);
+    }
+  }
+}
+
+// Table tie-break column
+.table__col.tie-break {
+  flex: 0 0 120px;
+  text-align: center;
+  
+  .tie-break__stats {
+    justify-content: center;
+    
+    .stat {
+      font-size: 11px;
+      padding: 2px 6px;
+    }
+  }
+}
+
+// Responsive adjustments for tie-break stats
+@media (max-width: 768px) {
+  .table__col.tie-break {
+    flex: 0 0 100px;
+    
+    .tie-break__stats {
+      align-items: center;
+      flex-direction: column;
+      gap: 4px;
+      
+      .stat {
+        font-size: 10px;
+        padding: 2px 4px;
+      }
+    }
+  }
+  
+  .podium__card .tie-break__stats {    
+    .stat {
+      font-size: 10px;
+      padding: 2px 4px;
     }
   }
 }

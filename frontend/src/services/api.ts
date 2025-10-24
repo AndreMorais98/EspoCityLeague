@@ -149,6 +149,25 @@ class ApiService {
       body: JSON.stringify(scores),
     });
   }
+
+  async updateTieBreakingStats(): Promise<any> {
+    return this.makeRequest<any>('/leaderboard/update-stats', {
+      method: 'POST',
+    });
+  }
+
+  async createMatch(matchData: {
+    home_team_id: number;
+    away_team_id: number;
+    stage_id: number;
+    kickoff_at: string;
+    place?: string;
+  }): Promise<any> {
+    return this.makeRequest<any>('/matches/', {
+      method: 'POST',
+      body: JSON.stringify(matchData),
+    });
+  }
 }
 
 export const apiService = new ApiService();

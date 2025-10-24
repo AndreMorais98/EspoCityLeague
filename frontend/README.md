@@ -28,8 +28,10 @@ The Espo City League frontend is a modern, responsive React application built wi
 - **React 18**: Latest React features with hooks and concurrent rendering
 - **TypeScript**: Full type safety and enhanced developer experience
 - **Responsive Design**: Mobile-first approach with collapsible sidebar
+- **Mobile Sidebar**: Full-screen mobile sidebar with toggle button
 - **Dark Theme**: Professional dark theme with smooth animations
 - **Real-time Updates**: Live match results and leaderboard updates
+- **Advanced Leaderboard**: Tie-breaking system with detailed statistics
 - **Admin Dashboard**: Comprehensive admin interface for match management
 - **Context API**: Efficient state management with React Context
 - **SCSS Styling**: Modular and maintainable stylesheets
@@ -51,13 +53,15 @@ frontend/
 │   │   ├── Games/      # My Predictions page
 │   │   ├── OthersBets/ # Community predictions
 │   │   ├── Leaderboard/# Rankings page
-│   │   ├── AdminMatches/ # Admin match management
+│   │   ├── AdminMatches/ # Admin match management (admin)
+│   │   ├── CreateMatch/ # Create new matches (admin)
 │   │   └── Login/      # Authentication page
 │   ├── contexts/       # React Context providers
 │   │   ├── UserContext.tsx    # User state management
 │   │   └── SidebarContext.tsx # Sidebar state management
 │   ├── services/       # API service layer
-│   │   └── api.ts      # HTTP client and API calls
+│   │   ├── api.ts      # HTTP client and API calls
+│   │   └── auth.ts     # Authentication service
 │   ├── utils/          # Utility functions
 │   │   └── stageUtils.ts # Stage analysis utilities
 │   ├── routes/         # Routing configuration
@@ -124,6 +128,53 @@ yarn global add serve && serve -s build
 ### 5. Live Application
 - **Production URL**: [https://espocity-league.mooo.com](https://espocity-league.mooo.com)
 - **Login Page**: [https://espocity-league.mooo.com/login](https://espocity-league.mooo.com/login)
+
+## 🏆 Advanced Features
+
+### Mobile Sidebar
+- **Full-Screen Mobile**: On mobile devices (≤768px), sidebar takes full screen
+- **Toggle Button**: Hamburger menu button (☰) for easy access
+- **Smooth Animations**: Slide-in/out transitions with overlay
+- **Touch-Friendly**: Optimized for mobile interaction
+
+### Advanced Leaderboard
+- **Tie-Breaking System**: Sophisticated ranking when scores are tied
+- **Visual Statistics**: Color-coded tie-breaking metrics
+- **Hover Tooltips**: Explanatory tooltips for each statistic
+- **Real-time Updates**: Automatic updates when match results change
+
+#### Tie-Breaking Metrics
+1. **✓ Correct Results**: Exact score predictions (green)
+2. **🐺 Lone Wolf Victories**: Unique correct predictions (orange/white)
+3. **✗ Defeats**: Games with 0 points (red)
+
+### Smart Navigation
+- **Auto-Scroll to Upcoming**: All stage-based pages automatically scroll to upcoming stage
+- **Chronological Order**: Maintains proper stage order while showing upcoming first
+- **Consistent Behavior**: Same scrollbar behavior across Games, Community Predictions, and Admin pages
+- **Smooth Animation**: Elegant scrolling transitions
+
+### Admin Features
+- **Match Management**: Edit match results with automatic score recalculation
+- **Create Matches**: Full match creation interface with team and stage selection
+- **Statistics Update**: Manual tie-breaking statistics refresh
+- **Smart Carousel**: Stages carousel scrolls to upcoming stage
+- **Real-time Sync**: Changes reflect immediately across the platform
+
+### Match Creation Interface
+- **Team Selection**: Dropdown with all available teams
+- **Validation**: Prevents same team for home/away
+- **Stage Selection**: Dropdown with all stages
+- **Date/Time Picker**: Native datetime-local input for kickoff
+- **Venue Field**: Optional text field for match location
+- **Form Validation**: Comprehensive error handling and success messages
+- **Admin Only**: Access restricted to superusers
+
+### Performance Optimizations
+- **Duplicate Call Prevention**: useRef-based loading state management
+- **Efficient API Calls**: Prevents unnecessary duplicate requests
+- **React StrictMode Compatible**: Works correctly in development mode
+- **Error Recovery**: Smart retry mechanism on API failures
 
 ## 🎨 Styling
 

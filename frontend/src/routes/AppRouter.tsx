@@ -7,6 +7,7 @@ import Rules from '../pages/Rules/Rules';
 import Games from '../pages/Games/Games';
 import UserDetails from '../pages/UserDetails/UserDetails';
 import AdminMatches from '../pages/AdminMatches/AdminMatches';
+import CreateMatch from '../pages/CreateMatch/CreateMatch';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: 'others-bets', element: <OthersBets /> },
       { path: 'profile', element: <UserDetails /> },
       { path: 'admin-matches', element: <AdminMatches /> },
+      { path: 'create-match', element: <CreateMatch /> },
     ],
   },
   { path: '/login', element: <Login /> },

@@ -74,6 +74,11 @@ export default function Leaderboard() {
               <div className="podium__name">{topThree[1].username}</div>
               <div className="podium__points">
                 <span className="points__earned">{topThree[1].score.toLocaleString()} points</span>
+                <div className="tie-break__stats">
+                  <span className="stat" title="Correct Results: Exact score predictions">✓ {topThree[1].correct_results}</span>
+                  <span className="stat" title="Lone Wolf Victories: Unique correct predictions">🐺 {topThree[1].lone_wolf_victories}</span>
+                  <span className="stat" title="Defeats: Incorrect predictions">✗ {topThree[1].defeats}</span>
+                </div>
               </div>
             </div>
           )}
@@ -93,6 +98,11 @@ export default function Leaderboard() {
               <div className="podium__name">{topThree[0].username}</div>
               <div className="podium__points">
                 <span className="points__earned">{topThree[0].score.toLocaleString()} points</span>
+                <div className="tie-break__stats">
+                  <span className="stat" title="Correct Results: Exact score predictions">✓ {topThree[0].correct_results}</span>
+                  <span className="stat" title="Lone Wolf Victories: Unique correct predictions">🐺 {topThree[0].lone_wolf_victories}</span>
+                  <span className="stat" title="Defeats: Incorrect predictions">✗ {topThree[0].defeats}</span>
+                </div>
               </div>
             </div>
           )}
@@ -112,6 +122,11 @@ export default function Leaderboard() {
               <div className="podium__name">{topThree[2].username}</div>
               <div className="podium__points">
                 <span className="points__earned">{topThree[2].score.toLocaleString()} points</span>
+                <div className="tie-break__stats">
+                  <span className="stat" title="Correct Results: Exact score predictions">✓ {topThree[2].correct_results}</span>
+                  <span className="stat" title="Lone Wolf Victories: Unique correct predictions">🐺 {topThree[2].lone_wolf_victories}</span>
+                  <span className="stat" title="Defeats: Incorrect predictions">✗ {topThree[2].defeats}</span>
+                </div>
               </div>
             </div>
           )}
@@ -125,6 +140,7 @@ export default function Leaderboard() {
             <div className="table__col rank">Rank</div>
             <div className="table__col username">User name</div>
             <div className="table__col points">Points</div>
+            <div className="table__col tie-break">Tie-break Stats</div>
           </div>
           
           {remainingUsers.map((user, index) => {
@@ -148,6 +164,13 @@ export default function Leaderboard() {
                 </div>
                 <div className="table__col points">
                   <span className="points__count">{user.score.toLocaleString()}</span>
+                </div>
+                <div className="table__col tie-break">
+                  <div className="tie-break__stats">
+                    <span className="stat" title="Correct Results: Exact score predictions">✓ {user.correct_results}</span>
+                    <span className="stat" title="Lone Wolf Victories: Unique correct predictions">🐺 {user.lone_wolf_victories}</span>
+                    <span className="stat" title="Defeats: Incorrect predictions">✗ {user.defeats}</span>
+                  </div>
                 </div>
               </div>
             );

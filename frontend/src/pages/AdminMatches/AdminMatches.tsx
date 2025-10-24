@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { apiService } from '../../services/api';
 import { analyzeStagesByDate, Stage, Match } from '../../utils/stageUtils';
 import { useUser } from '../../contexts/UserContext';
@@ -28,6 +28,8 @@ export default function AdminMatches() {
   const [homeScore, setHomeScore] = useState<string>('');
   const [awayScore, setAwayScore] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
+  const [updatingStats, setUpdatingStats] = useState(false);
+  const stageTabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (user?.is_superuser) {
@@ -40,6 +42,16 @@ export default function AdminMatches() {
       loadStageMatches(selectedStageId);
     }
   }, [selectedStageId, user]);
+
+  // Scroll to upcoming stage when stages are loaded
+  useEffect(() => {
+    if (upcomingStageId && stageTabsRef.current) {
+      const upcomingTab = stageTabsRef.current.querySelector(`[data-stage-id="${upcomingStageId}"]`) as HTMLElement;
+      if (upcomingTab) {
+        upcomingTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+    }
+  }, [upcomingStageId, stages]);
 
   const loadStages = async () => {
     try {
@@ -127,6 +139,22 @@ export default function AdminMatches() {
     }
   };
 
+  const handleUpdateStats = async () => {
+    setUpdatingStats(true);
+    setError(null);
+
+    try {
+      await apiService.updateTieBreakingStats();
+      // Show success message or handle success
+      console.log('Tie-breaking stats updated successfully');
+    } catch (err: any) {
+      console.error('Error updating tie-breaking stats:', err);
+      setError(err.message || 'Failed to update tie-breaking stats');
+    } finally {
+      setUpdatingStats(false);
+    }
+  };
+
   const formatMatchDate = (dateString: string): string => {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
@@ -175,13 +203,28 @@ export default function AdminMatches() {
         <div className="admin-matches-header">
           <h1 className="page-title">Match Results Management</h1>
           <p className="page-subtitle">Update match scores and results</p>
+          <div className="header-actions">
+            <button
+              className="update-stats-button"
+              onClick={handleUpdateStats}
+              disabled={updatingStats}
+            >
+              {updatingStats ? 'Updating...' : 'Update Tie-Breaking Stats'}
+            </button>
+          </div>
         </div>
 
         {stages.length > 0 && (
-          <div className="stage-tabs">
-            {stages.map((stage) => (
+          <div className="stage-tabs" ref={stageTabsRef}>
+            {stages
+              .sort((a, b) => {
+                // Sort stages chronologically by date
+                return new Date(a.date).getTime() - new Date(b.date).getTime();
+              })
+              .map((stage, index) => (
               <button
                 key={stage.id}
+                data-stage-id={stage.id}
                 className={`stage-tab ${
                   selectedStageId === stage.id ? 'active' : ''
                 } ${upcomingStageId === stage.id ? 'upcoming' : ''} ${

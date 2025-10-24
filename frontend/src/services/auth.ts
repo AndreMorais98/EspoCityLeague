@@ -11,6 +11,9 @@ export interface User {
   username: string;
   phone: string;
   score: number;
+  correct_results: number;
+  lone_wolf_victories: number;
+  defeats: number;
   is_active: boolean;
   is_superuser: boolean;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { apiService } from '../../services/api';
 import { analyzeStagesByDate, isMatchLive, Stage, Match } from '../../utils/stageUtils';
 import MatchCard from '../../components/MatchCard/MatchCard';
@@ -27,6 +27,7 @@ export default function Games() {
   const [matches, setMatches] = useState<MatchWithBet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const stageTabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadStages();
@@ -37,6 +38,16 @@ export default function Games() {
       loadStageMatches(selectedStageId);
     }
   }, [selectedStageId]);
+
+  // Scroll to upcoming stage when stages are loaded
+  useEffect(() => {
+    if (upcomingStageId && stageTabsRef.current) {
+      const upcomingTab = stageTabsRef.current.querySelector(`[data-stage-id="${upcomingStageId}"]`) as HTMLElement;
+      if (upcomingTab) {
+        upcomingTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+    }
+  }, [upcomingStageId, stages]);
 
 
   const loadStages = async () => {
@@ -147,10 +158,16 @@ export default function Games() {
       </div>
 
       {stages.length > 0 && (
-        <div className="stage-tabs">
-          {stages.map((stage) => (
+        <div className="stage-tabs" ref={stageTabsRef}>
+          {stages
+            .sort((a, b) => {
+              // Sort stages chronologically by date
+              return new Date(a.date).getTime() - new Date(b.date).getTime();
+            })
+            .map((stage) => (
             <button
               key={stage.id}
+              data-stage-id={stage.id}
               className={`stage-tab ${
                 selectedStageId === stage.id ? 'active' : ''
               } ${upcomingStageId === stage.id ? 'upcoming' : ''} ${

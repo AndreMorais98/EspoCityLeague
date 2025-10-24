@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { apiService } from '../../services/api';
 import { analyzeStagesByDate, Stage, Match } from '../../utils/stageUtils';
 import './OthersBets.scss';
@@ -31,6 +31,7 @@ export default function OthersBets() {
   const [bets, setBets] = useState<Bet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const stageTabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadStages();
@@ -41,6 +42,16 @@ export default function OthersBets() {
       loadStageBets(selectedStageId);
     }
   }, [selectedStageId]);
+
+  // Scroll to upcoming stage when stages are loaded
+  useEffect(() => {
+    if (upcomingStageId && stageTabsRef.current) {
+      const upcomingTab = stageTabsRef.current.querySelector(`[data-stage-id="${upcomingStageId}"]`) as HTMLElement;
+      if (upcomingTab) {
+        upcomingTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+    }
+  }, [upcomingStageId, stages]);
 
   const loadStages = async () => {
     setLoading(true);
@@ -147,10 +158,16 @@ export default function OthersBets() {
       </div>
 
       {stages.length > 0 && (
-        <div className="stage-tabs">
-          {stages.map((stage) => (
+        <div className="stage-tabs" ref={stageTabsRef}>
+          {stages
+            .sort((a, b) => {
+              // Sort stages chronologically by date
+              return new Date(a.date).getTime() - new Date(b.date).getTime();
+            })
+            .map((stage) => (
             <button
               key={stage.id}
+              data-stage-id={stage.id}
               className={`stage-tab ${
                 selectedStageId === stage.id ? 'active' : ''
               } ${upcomingStageId === stage.id ? 'upcoming' : ''} ${

@@ -2,8 +2,19 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 from app.db import get_session
 from app.models.team import Team
+from app.dependencies import get_current_user
 
 router = APIRouter(prefix="/teams", tags=["teams"])
+
+@router.get("", response_model=list[Team])
+@router.get("/", response_model=list[Team])
+def get_teams(
+    session: Session = Depends(get_session),
+    current_user = Depends(get_current_user)
+) -> list[Team]:
+    """Get all teams"""
+    teams = session.exec(select(Team)).all()
+    return teams
 
 
 @router.post("/", response_model=Team)

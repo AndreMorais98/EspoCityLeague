@@ -7,6 +7,7 @@ from app.models.match import Match, MatchCreate, MatchUpdate, MatchResponse
 from app.models.bet import Bet
 from app.models.user import User
 from app.dependencies import get_current_user
+from app.services.tie_breaking import update_all_users_tie_breaking_stats
 
 router = APIRouter(prefix="/matches", tags=["matches"])
 
@@ -121,13 +122,16 @@ def update_match_scores(
     # Check if this is the first time scores are being set
     is_first_time_scoring = match.home_score is None and match.away_score is None
     
+    # Check if scores are being changed (not first time)
+    is_score_update = not is_first_time_scoring and (match.home_score != home_score or match.away_score != away_score)
+    
     # Update match scores
     match.home_score = home_score
     match.away_score = away_score
     match.updated_at = datetime.now()
     
-    # Process bets only if this is the first time scores are being set
-    if is_first_time_scoring:
+    # Process bets if this is first time scoring OR if scores are being updated
+    if is_first_time_scoring or is_score_update:
         # Get all bets for this match
         bets_stmt = select(Bet).where(Bet.match_id == match_id)
         bets = session.exec(bets_stmt).all()
@@ -144,6 +148,13 @@ def update_match_scores(
                 away_score
             )
             
+            # If this is a score update, subtract the old points first
+            if is_score_update:
+                old_points = bet.points_awarded
+                if bet.user_id not in user_score_updates:
+                    user_score_updates[bet.user_id] = 0
+                user_score_updates[bet.user_id] -= old_points
+            
             # Update bet points
             bet.points_awarded = points_awarded
             bet.updated_at = datetime.now()
@@ -159,6 +170,10 @@ def update_match_scores(
             if user:
                 user.score += points_to_add
                 user.updated_at = datetime.now()
+                session.add(user)
+        
+        # Update tie-breaking statistics for all users after processing bets
+        update_all_users_tie_breaking_stats(session)
     
     session.add(match)
     session.commit()

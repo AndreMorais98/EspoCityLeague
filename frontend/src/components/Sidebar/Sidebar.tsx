@@ -86,6 +86,16 @@ export default function Sidebar() {
             {!isCollapsed && <span className="item__text">Manage Matches</span>}
           </NavLink>
         )}
+        {user?.is_superuser && (
+          <NavLink
+            to="/create-match"
+            className={({ isActive }) => `sidebar__item ${isActive ? 'active' : ''}`}
+            title={isCollapsed ? 'Create Match' : ''}
+          >
+            <div className="item__icon">➕</div>
+            {!isCollapsed && <span className="item__text">Create Match</span>}
+          </NavLink>
+        )}
       </nav>
       
       <div className="sidebar__footer">

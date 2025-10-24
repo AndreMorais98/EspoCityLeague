@@ -1,17 +1,37 @@
+// Global resets to prevent gaps
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .layout { 
     display: flex;
-    min-height: 100vh; 
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .content { 
     flex: 1; 
-    margin-left: 280px;
+    margin-left: 280px; // 280px sidebar (no border)
     padding: 24px; 
     background: #f8fafc; 
     color: #1e293b;
     min-height: 100vh;
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
+    width: calc(100% - 280px);
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
 }
 
 // ===== RESPONSIVE DESIGN =====

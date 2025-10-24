@@ -4,6 +4,10 @@
   min-height: 100vh;
   color: #1e293b;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 
   &__loading {
     display: flex;
@@ -61,6 +65,10 @@
     padding: 0 20px;
     position: relative;
     height: 360px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
   }
 
   &__summary {
@@ -71,8 +79,12 @@
     background: #ffffff;
     border-radius: 16px;
     padding: 20px;
-    border: 1px solid #e2e8f0;
+    border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
   }
 }
 
@@ -100,7 +112,7 @@
 
 .podium__card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: none;
   border-radius: 20px;
   padding: 24px;
   text-align: center;
@@ -108,15 +120,17 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   min-width: 200px;
+  max-width: 250px;
   height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-shrink: 0;
 
   &.first {
     height: 320px;
     background: linear-gradient(135deg, #fef3c7, #fbbf24);
-    border-color: #f59e0b;
+    border: none;
     box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
     z-index: 3;
     align-self: flex-start;
@@ -125,8 +139,8 @@
 
   &.second {
     height: 280px;
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-    border-color: #94a3b8;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+    border: none;
     box-shadow: 0 10px 20px rgba(148, 163, 184, 0.2);
     z-index: 2;
   }
@@ -134,7 +148,7 @@
   &.third {
     height: 280px;
     background: linear-gradient(135deg, #fed7aa, #fb923c);
-    border-color: #ea580c;
+    border: none;
     box-shadow: 0 10px 20px rgba(234, 88, 12, 0.2);
     z-index: 1;
   }
@@ -420,18 +434,27 @@
 @media (max-width: 480px) {
   .leaderboard {
     padding: 12px;
+    overflow-x: hidden;
 
     &__title {
       font-size: 24px;
+    }
+
+    &__podium {
+      gap: 10px;
+      padding: 0 10px;
+      height: auto;
+      min-height: 300px;
     }
 
     .podium__card {
       &.first,
       &.second,
       &.third {
-        min-width: 20px;
+        min-width: 120px;
+        max-width: 150px;
         width: 150px;
-        padding: 24px 10px;
+        padding: 16px 8px;
 
         .avatar {
           width: 40px;
@@ -521,6 +544,7 @@
   
   .tie-break__stats {
     justify-content: center;
+    gap: 6px;
     
     .stat {
       font-size: 11px;

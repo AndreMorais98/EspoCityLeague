@@ -36,13 +36,6 @@ export default function Sidebar() {
 
   return (
     <aside className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
-      <button 
-        className="sidebar__toggle"
-        onClick={toggleMobileSidebar}
-        title="Toggle menu"
-      >
-        {isMobileOpen ? '✕' : '☰'}
-      </button>
       
       <div className="sidebar__brand">
         <img className="symbol-bg" src="/images/symbol.png" alt="UEFA symbol background"/>

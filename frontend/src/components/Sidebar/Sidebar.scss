@@ -9,16 +9,19 @@
   left: 0;
   top: 0;
   z-index: 1000;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
   transition: transform 0.3s ease;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .sidebar__toggle {
-  display: none !important; // Hide toggle button on desktop
+  display: none; // Hide toggle button on desktop
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
   width: 30px;
   height: 30px;
   background: #1e3a8a;
@@ -28,7 +31,6 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1001;
@@ -160,6 +162,30 @@
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 0; // Allow flex item to shrink
+  
+  // Custom scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+  
+  // Firefox scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 .sidebar__item {
@@ -362,7 +388,7 @@
   }
 
   .sidebar__toggle {
-    display: flex !important; // Show toggle button on mobile
+    display: none; // Hide sidebar toggle on mobile (using mobile menu toggle instead)
   }
 
   .mobile-menu-toggle {
